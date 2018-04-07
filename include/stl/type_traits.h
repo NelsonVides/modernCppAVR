@@ -22,7 +22,6 @@ template<bool B> using bool_constant = integral_constant<bool, B>;
 using true_type  = integral_constant<bool, true>;
 using false_type = integral_constant<bool, false>;
 
-
 /*
  * Type relationships
  */
@@ -94,11 +93,49 @@ namespace detail {
 template<typename T> struct is_pointer : detail::is_pointer_helper<remove_cv_t<T>> {};
 
 /*
+ * function qualifiers
+ */
+// primary template
+template<class> struct is_function : false_type { };
+// specialization for regular functions
+template<class Ret, class... Args> struct is_function<Ret(Args...)> : true_type {};
+//specialization for variadic functions such as printf
+template<class Ret, class... Args> struct is_function<Ret(Args......)> : true_type {};
+//specialization for function types that have cv-qualifiers
+template<class Ret, class... Args> struct is_function<Ret(Args...) const> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args...) volatile> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args...) const volatile> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args......) const> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args......) volatile> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args......) const volatile> : true_type {};
+//specialization for function types that have ref-qualifiers
+template<class Ret, class... Args> struct is_function<Ret(Args...) &> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args...) const &> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args...) volatile &> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args...) const volatile &> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args......) &> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args......) const &> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args......) volatile &> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args......) const volatile &> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args...) &&> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args...) const &&> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args...) volatile &&> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args...) const volatile &&> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args......) &&> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args......) const &&> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args......) volatile &&> : true_type {};
+template<class Ret, class... Args> struct is_function<Ret(Args......) const volatile &&> : true_type {};
+
+/*
  * essentials
  */
+
+// enable_if
+template<bool, typename T = void> struct enable_if { };
+template<typename T> struct enable_if<true, T> { using type = T; };
+
 // is_void
 template<typename T> struct is_void : is_same<void, remove_cv_t<T>> {};
-//template<typename T> constexpr bool is_void_v = is_void<T>::value;
 
 // is_null_pointer
 using nullptr_t = decltype(nullptr);
@@ -140,6 +177,11 @@ template<typename T> struct is_array : false_type {};
 template<typename T> struct is_array<T[]> : true_type {};
 template<typename T, size_t N> struct is_array<T[N]> : true_type {};
 
+// rank
+template<class T> struct rank : public integral_constant<size_t, 0> {};
+template<class T> struct rank<T[]> : public integral_constant<size_t, rank<T>::value + 1> {};
+template<class T, size_t N> struct rank<T[N]> : public integral_constant<size_t, rank<T>::value + 1> {};
+
 /*
  * numeric qualifiers
  */
@@ -148,12 +190,27 @@ namespace detail {
     template<typename T, bool = is_arithmetic<T>::value>
         struct is_signed : integral_constant<bool, T(-1) < T(0)> {};
     template<typename T> struct is_signed<T,false> : false_type {};
-} // namespace detail
- 
+} 
 template<typename T> struct is_signed : detail::is_signed<T>::type {};
+
+namespace detail {
+    template<typename T, bool = is_arithmetic<T>::value>
+        struct is_unsigned : integral_constant<bool, T(0) < T(-1)> {};
+    template<typename T> struct is_unsigned<T, false> : false_type {};
+} // namespace detail
+template<typename T> struct is_unsigned : detail::is_unsigned<T>::type {};
+
+// Utility for finding the signed versions of unsigned integral types.
+template<typename SignedType> struct make_unsigned { using type = SignedType; };
+template<> struct make_unsigned<signed char>       { using type = unsigned char; };
+template<> struct make_unsigned<signed short>      { using type = unsigned short; };
+template<> struct make_unsigned<signed int>        { using type = unsigned int; };
+template<> struct make_unsigned<signed long>       { using type = unsigned long; };
+template<> struct make_unsigned<signed long long>  { using type = unsigned long long; };
 
 
 } //end of namespace atl
+
 #endif
 
 
