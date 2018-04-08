@@ -131,8 +131,9 @@ template<class Ret, class... Args> struct is_function<Ret(Args......) const vola
  */
 
 // enable_if
-template<bool, typename T = void> struct enable_if { };
+template<bool B, typename T = void> struct enable_if { };
 template<typename T> struct enable_if<true, T> { using type = T; };
+template<bool B, typename T = void> using enable_if_t = typename enable_if<B,T>::type;
 
 // is_void
 template<typename T> struct is_void : is_same<void, remove_cv_t<T>> {};
