@@ -57,283 +57,283 @@
 /* Registers and associated bit numbers */
 
 #define PINA    _SFR_IO8(0X00)
-#define PINA7   7
-#define PINA6   6
-#define PINA5   5
-#define PINA4   4
-#define PINA3   3
-#define PINA2   2
-#define PINA1   1
-#define PINA0   0
+constexpr auto PINA7 = 7;
+constexpr auto PINA6 = 6;
+constexpr auto PINA5 = 5;
+constexpr auto PINA4 = 4;
+constexpr auto PINA3 = 3;
+constexpr auto PINA2 = 2;
+constexpr auto PINA1 = 1;
+constexpr auto PINA0 = 0;
 
 #define DDRA    _SFR_IO8(0X01)
-#define DDA7    7
-#define DDA6    6
-#define DDA5    5
-#define DDA4    4
-#define DDA3    3
-#define DDA2    2
-#define DDA1    1
-#define DDA0    0
+constexpr auto DDA7 = 7;
+constexpr auto DDA6 = 6;
+constexpr auto DDA5 = 5;
+constexpr auto DDA4 = 4;
+constexpr auto DDA3 = 3;
+constexpr auto DDA2 = 2;
+constexpr auto DDA1 = 1;
+constexpr auto DDA0 = 0;
 
 #define PORTA   _SFR_IO8(0X02)
-#define PA7     7
-#define PA6     6
-#define PA5     5
-#define PA4     4
-#define PA3     3
-#define PA2     2
-#define PA1     1
-#define PA0     0
+constexpr auto PA7 = 7;
+constexpr auto PA6 = 6;
+constexpr auto PA5 = 5;
+constexpr auto PA4 = 4;
+constexpr auto PA3 = 3;
+constexpr auto PA2 = 2;
+constexpr auto PA1 = 1;
+constexpr auto PA0 = 0;
 
 #define PINB    _SFR_IO8(0X03)
-#define PINB7   7
-#define PINB6   6
-#define PINB5   5
-#define PINB4   4
-#define PINB3   3
-#define PINB2   2
-#define PINB1   1
-#define PINB0   0
+constexpr auto PINB7 = 7;
+constexpr auto PINB6 = 6;
+constexpr auto PINB5 = 5;
+constexpr auto PINB4 = 4;
+constexpr auto PINB3 = 3;
+constexpr auto PINB2 = 2;
+constexpr auto PINB1 = 1;
+constexpr auto PINB0 = 0;
 
 #define DDRB    _SFR_IO8(0x04)
-#define DDB7    7
-#define DDB6    6
-#define DDB5    5
-#define DDB4    4
-#define DDB3    3
-#define DDB2    2
-#define DDB1    1
-#define DDB0    0
+constexpr auto DDB7 = 7;
+constexpr auto DDB6 = 6;
+constexpr auto DDB5 = 5;
+constexpr auto DDB4 = 4;
+constexpr auto DDB3 = 3;
+constexpr auto DDB2 = 2;
+constexpr auto DDB1 = 1;
+constexpr auto DDB0 = 0;
 
 #define PORTB   _SFR_IO8(0x05)
-#define PB7     7
-#define PB6     6
-#define PB5     5
-#define PB4     4
-#define PB3     3
-#define PB2     2
-#define PB1     1
-#define PB0     0
+constexpr auto PB7 = 7;
+constexpr auto PB6 = 6;
+constexpr auto PB5 = 5;
+constexpr auto PB4 = 4;
+constexpr auto PB3 = 3;
+constexpr auto PB2 = 2;
+constexpr auto PB1 = 1;
+constexpr auto PB0 = 0;
 
 #define PINC    _SFR_IO8(0x06)
-#define PINC7   7
-#define PINC6   6
-#define PINC5   5
-#define PINC4   4
-#define PINC3   3
-#define PINC2   2
-#define PINC1   1
-#define PINC0   0
+constexpr auto PINC7 = 7;
+constexpr auto PINC6 = 6;
+constexpr auto PINC5 = 5;
+constexpr auto PINC4 = 4;
+constexpr auto PINC3 = 3;
+constexpr auto PINC2 = 2;
+constexpr auto PINC1 = 1;
+constexpr auto PINC0 = 0;
 
 #define DDRC    _SFR_IO8(0x07)
-#define DDC7    7
-#define DDC6    6
-#define DDC5    5
-#define DDC4    4
-#define DDC3    3
-#define DDC2    2
-#define DDC1    1
-#define DDC0    0
+constexpr auto DDC7 = 7;
+constexpr auto DDC6 = 6;
+constexpr auto DDC5 = 5;
+constexpr auto DDC4 = 4;
+constexpr auto DDC3 = 3;
+constexpr auto DDC2 = 2;
+constexpr auto DDC1 = 1;
+constexpr auto DDC0 = 0;
 
 #define PORTC   _SFR_IO8(0x08)
-#define PC7     7
-#define PC6     6
-#define PC5     5
-#define PC4     4
-#define PC3     3
-#define PC2     2
-#define PC1     1
-#define PC0     0
+constexpr auto PC7 = 7;
+constexpr auto PC6 = 6;
+constexpr auto PC5 = 5;
+constexpr auto PC4 = 4;
+constexpr auto PC3 = 3;
+constexpr auto PC2 = 2;
+constexpr auto PC1 = 1;
+constexpr auto PC0 = 0;
 
 #define PIND    _SFR_IO8(0x09)
-#define PIND7   7
-#define PIND6   6
-#define PIND5   5
-#define PIND4   4
-#define PIND3   3
-#define PIND2   2
-#define PIND1   1
-#define PIND0   0
+constexpr auto PIND7 = 7;
+constexpr auto PIND6 = 6;
+constexpr auto PIND5 = 5;
+constexpr auto PIND4 = 4;
+constexpr auto PIND3 = 3;
+constexpr auto PIND2 = 2;
+constexpr auto PIND1 = 1;
+constexpr auto PIND0 = 0;
 
 #define DDRD    _SFR_IO8(0x0A)
-#define DDD7    7
-#define DDD6    6
-#define DDD5    5
-#define DDD4    4
-#define DDD3    3
-#define DDD2    2
-#define DDD1    1
-#define DDD0    0
+constexpr auto DDD7 = 7;
+constexpr auto DDD6 = 6;
+constexpr auto DDD5 = 5;
+constexpr auto DDD4 = 4;
+constexpr auto DDD3 = 3;
+constexpr auto DDD2 = 2;
+constexpr auto DDD1 = 1;
+constexpr auto DDD0 = 0;
 
 #define PORTD   _SFR_IO8(0x0B)
-#define PD7     7
-#define PD6     6
-#define PD5     5
-#define PD4     4
-#define PD3     3
-#define PD2     2
-#define PD1     1
-#define PD0     0
+constexpr auto PD7 = 7;
+constexpr auto PD6 = 6;
+constexpr auto PD5 = 5;
+constexpr auto PD4 = 4;
+constexpr auto PD3 = 3;
+constexpr auto PD2 = 2;
+constexpr auto PD1 = 1;
+constexpr auto PD0 = 0;
 
 #define PINE    _SFR_IO8(0x0C)
-#define PINE7   7
-#define PINE6   6
-#define PINE5   5
-#define PINE4   4
-#define PINE3   3
-#define PINE2   2
-#define PINE1   1
-#define PINE0   0
+constexpr auto PINE7 = 7;
+constexpr auto PINE6 = 6;
+constexpr auto PINE5 = 5;
+constexpr auto PINE4 = 4;
+constexpr auto PINE3 = 3;
+constexpr auto PINE2 = 2;
+constexpr auto PINE1 = 1;
+constexpr auto PINE0 = 0;
 
 #define DDRE    _SFR_IO8(0x0D)
-#define DDE7    7
-#define DDE6    6
-#define DDE5    5
-#define DDE4    4
-#define DDE3    3
-#define DDE2    2
-#define DDE1    1
-#define DDE0    0
+constexpr auto DDE7 = 7;
+constexpr auto DDE6 = 6;
+constexpr auto DDE5 = 5;
+constexpr auto DDE4 = 4;
+constexpr auto DDE3 = 3;
+constexpr auto DDE2 = 2;
+constexpr auto DDE1 = 1;
+constexpr auto DDE0 = 0;
 
 #define PORTE   _SFR_IO8(0x0E)
-#define PE7     7
-#define PE6     6
-#define PE5     5
-#define PE4     4
-#define PE3     3
-#define PE2     2
-#define PE1     1
-#define PE0     0
+constexpr auto PE7 = 7;
+constexpr auto PE6 = 6;
+constexpr auto PE5 = 5;
+constexpr auto PE4 = 4;
+constexpr auto PE3 = 3;
+constexpr auto PE2 = 2;
+constexpr auto PE1 = 1;
+constexpr auto PE0 = 0;
 
 #define PINF    _SFR_IO8(0x0F)
-#define PINF7   7
-#define PINF6   6
-#define PINF5   5
-#define PINF4   4
-#define PINF3   3
-#define PINF2   2
-#define PINF1   1
-#define PINF0   0
+constexpr auto PINF7 = 7;
+constexpr auto PINF6 = 6;
+constexpr auto PINF5 = 5;
+constexpr auto PINF4 = 4;
+constexpr auto PINF3 = 3;
+constexpr auto PINF2 = 2;
+constexpr auto PINF1 = 1;
+constexpr auto PINF0 = 0;
 
 #define DDRF    _SFR_IO8(0x10)
-#define DDF7    7
-#define DDF6    6
-#define DDF5    5
-#define DDF4    4
-#define DDF3    3
-#define DDF2    2
-#define DDF1    1
-#define DDF0    0
+constexpr auto DDF7 = 7;
+constexpr auto DDF6 = 6;
+constexpr auto DDF5 = 5;
+constexpr auto DDF4 = 4;
+constexpr auto DDF3 = 3;
+constexpr auto DDF2 = 2;
+constexpr auto DDF1 = 1;
+constexpr auto DDF0 = 0;
 
 #define PORTF   _SFR_IO8(0x11)
-#define PF7     7
-#define PF6     6
-#define PF5     5
-#define PF4     4
-#define PF3     3
-#define PF2     2
-#define PF1     1
-#define PF0     0
+constexpr auto PF7 = 7;
+constexpr auto PF6 = 6;
+constexpr auto PF5 = 5;
+constexpr auto PF4 = 4;
+constexpr auto PF3 = 3;
+constexpr auto PF2 = 2;
+constexpr auto PF1 = 1;
+constexpr auto PF0 = 0;
 
 #define PING    _SFR_IO8(0x12)
-#define PING5   5
-#define PING4   4
-#define PING3   3
-#define PING2   2
-#define PING1   1
-#define PING0   0
+constexpr auto PING5 = 5;
+constexpr auto PING4 = 4;
+constexpr auto PING3 = 3;
+constexpr auto PING2 = 2;
+constexpr auto PING1 = 1;
+constexpr auto PING0 = 0;
 
 #define DDRG    _SFR_IO8(0x13)
-#define DDG5    5
-#define DDG4    4
-#define DDG3    3
-#define DDG2    2
-#define DDG1    1
-#define DDG0    0
+constexpr auto DDG5 = 5;
+constexpr auto DDG4 = 4;
+constexpr auto DDG3 = 3;
+constexpr auto DDG2 = 2;
+constexpr auto DDG1 = 1;
+constexpr auto DDG0 = 0;
 
 #define PORTG   _SFR_IO8(0x14)
-#define PG5     5
-#define PG4     4
-#define PG3     3
-#define PG2     2
-#define PG1     1
-#define PG0     0
+constexpr auto PG5 = 5;
+constexpr auto PG4 = 4;
+constexpr auto PG3 = 3;
+constexpr auto PG2 = 2;
+constexpr auto PG1 = 1;
+constexpr auto PG0 = 0;
 
 #define TIFR0   _SFR_IO8(0x15)
-#define OCF0B   2
-#define OCF0A   1
-#define TOV0    0
+constexpr auto OCF0B = 2;
+constexpr auto OCF0A = 1;
+constexpr auto TOV0 = 0;
 
 #define TIFR1   _SFR_IO8(0x16)
-#define ICF1    5
-#define OCF1C   3
-#define OCF1B   2
-#define OCF1A   1
-#define TOV1    0
+constexpr auto ICF1 = 5;
+constexpr auto OCF1C = 3;
+constexpr auto OCF1B = 2;
+constexpr auto OCF1A = 1;
+constexpr auto TOV1 = 0;
 
 #define TIFR2   _SFR_IO8(0x17)
-#define OCF2B   2
-#define OCF2A   1
-#define TOV2    0
+constexpr auto OCF2B = 2;
+constexpr auto OCF2A = 1;
+constexpr auto TOV2 = 0;
 
 #define TIFR3   _SFR_IO8(0x18)
-#define ICF3    5
-#define OCF3C   3
-#define OCF3B   2
-#define OCF3A   1
-#define TOV3    0
+constexpr auto ICF3 = 5;
+constexpr auto OCF3C = 3;
+constexpr auto OCF3B = 2;
+constexpr auto OCF3A = 1;
+constexpr auto TOV3 = 0;
 
 #define TIFR4   _SFR_IO8(0x19)
-#define ICF4    5
-#define OCF4C   3
-#define OCF4B   2
-#define OCF4A   1
-#define TOV4    0
+constexpr auto ICF4 = 5;
+constexpr auto OCF4C = 3;
+constexpr auto OCF4B = 2;
+constexpr auto OCF4A = 1;
+constexpr auto TOV4 = 0;
 
 #define TIFR5   _SFR_IO8(0x1A)
-#define ICF5    5
-#define OCF5C   3
-#define OCF5B   2
-#define OCF5A   1
-#define TOV5    0
+constexpr auto ICF5 = 5;
+constexpr auto OCF5C = 3;
+constexpr auto OCF5B = 2;
+constexpr auto OCF5A = 1;
+constexpr auto TOV5 = 0;
 
 #define PCIFR   _SFR_IO8(0x1B)
 #if defined(__ATmegaxx0__) 
 # define PCIF2  2
 #endif /* __ATmegaxx0__ */
-#define PCIF1   1
-#define PCIF0   0
+constexpr auto PCIF1 = 1;
+constexpr auto PCIF0 = 0;
 
 #define EIFR   _SFR_IO8(0x1C)
-#define INTF7   7
-#define INTF6   6
-#define INTF5   5
-#define INTF4   4
-#define INTF3   3
-#define INTF2   2
-#define INTF1   1
-#define INTF0   0
+constexpr auto INTF7 = 7;
+constexpr auto INTF6 = 6;
+constexpr auto INTF5 = 5;
+constexpr auto INTF4 = 4;
+constexpr auto INTF3 = 3;
+constexpr auto INTF2 = 2;
+constexpr auto INTF1 = 1;
+constexpr auto INTF0 = 0;
 
 #define EIMSK   _SFR_IO8(0x1D)
-#define INT7    7
-#define INT6    6
-#define INT5    5
-#define INT4    4
-#define INT3    3
-#define INT2    2
-#define INT1    1 
-#define INT0    0
+constexpr auto INT7 = 7;
+constexpr auto INT6 = 6;
+constexpr auto INT5 = 5;
+constexpr auto INT4 = 4;
+constexpr auto INT3 = 3;
+constexpr auto INT2 = 2;
+constexpr auto INT1 = 1 ;
+constexpr auto INT0 = 0;
 
 #define GPIOR0  _SFR_IO8(0x1E)
 
 #define EECR    _SFR_IO8(0x1F)
-#define EEPM1   5
-#define EEPM0   4
-#define EERIE   3
-#define EEMPE   2
-#define EEPE    1
-#define EERE    0
+constexpr auto EEPM1 = 5;
+constexpr auto EEPM0 = 4;
+constexpr auto EERIE = 3;
+constexpr auto EEMPE = 2;
+constexpr auto EEPE = 1;
+constexpr auto EERE = 0;
 
 #define EEDR    _SFR_IO8(0X20)
 
@@ -352,25 +352,25 @@
 #define __EEPROM_REG_LOCATIONS__ 1F2021
 
 #define GTCCR   _SFR_IO8(0x23)
-#define TSM     7
-#define PSRASY  1
-#define PSRSYNC 0
+constexpr auto TSM = 7;
+constexpr auto PSRASY = 1;
+constexpr auto PSRSYNC = 0;
 
 #define TCCR0A  _SFR_IO8(0x24)
-#define COM0A1  7
-#define COM0A0  6
-#define COM0B1  5
-#define COM0B0  4
-#define WGM01   1
-#define WGM00   0
+constexpr auto COM0A1 = 7;
+constexpr auto COM0A0 = 6;
+constexpr auto COM0B1 = 5;
+constexpr auto COM0B0 = 4;
+constexpr auto WGM01 = 1;
+constexpr auto WGM00 = 0;
 
 #define TCCR0B  _SFR_IO8(0x25)
-#define FOC0A   7
-#define FOC0B   6
-#define WGM02   3
-#define CS02    2
-#define CS01    1
-#define CS00    0
+constexpr auto FOC0A = 7;
+constexpr auto FOC0B = 6;
+constexpr auto WGM02 = 3;
+constexpr auto CS02 = 2;
+constexpr auto CS01 = 1;
+constexpr auto CS00 = 0;
 
 #define TCNT0   _SFR_IO8(0X26)
 
@@ -385,117 +385,117 @@
 #define GPIOR2  _SFR_IO8(0x2B)
 
 #define SPCR    _SFR_IO8(0x2C)
-#define SPIE    7
-#define SPE     6
-#define DORD    5
-#define MSTR    4
-#define CPOL    3
-#define CPHA    2
-#define SPR1    1
-#define SPR0    0
+constexpr auto SPIE = 7;
+constexpr auto SPE = 6;
+constexpr auto DORD = 5;
+constexpr auto MSTR = 4;
+constexpr auto CPOL = 3;
+constexpr auto CPHA = 2;
+constexpr auto SPR1 = 1;
+constexpr auto SPR0 = 0;
 
 #define SPSR    _SFR_IO8(0x2D)
-#define SPIF    7
-#define WCOL    6
-#define SPI2X   0
+constexpr auto SPIF = 7;
+constexpr auto WCOL = 6;
+constexpr auto SPI2X = 0;
 
 #define SPDR    _SFR_IO8(0X2E)
 
 /* Reserved [0x2F] */
 
 #define ACSR    _SFR_IO8(0x30)
-#define ACD     7
-#define ACBG    6
-#define ACO     5
-#define ACI     4
-#define ACIE    3
-#define ACIC    2
-#define ACIS1   1
-#define ACIS0   0
+constexpr auto ACD = 7;
+constexpr auto ACBG = 6;
+constexpr auto ACO = 5;
+constexpr auto ACI = 4;
+constexpr auto ACIE = 3;
+constexpr auto ACIC = 2;
+constexpr auto ACIS1 = 1;
+constexpr auto ACIS0 = 0;
 
 #define MONDR   _SFR_IO8(0x31)
 #define OCDR    _SFR_IO8(0x31)
-#define IDRD    7
-#define OCDR7   7
-#define OCDR6   6
-#define OCDR5   5
-#define OCDR4   4
-#define OCDR3   3
-#define OCDR2   2
-#define OCDR1   1
-#define OCDR0   0
+constexpr auto IDRD = 7;
+constexpr auto OCDR7 = 7;
+constexpr auto OCDR6 = 6;
+constexpr auto OCDR5 = 5;
+constexpr auto OCDR4 = 4;
+constexpr auto OCDR3 = 3;
+constexpr auto OCDR2 = 2;
+constexpr auto OCDR1 = 1;
+constexpr auto OCDR0 = 0;
 
 /* Reserved [0x32] */
 
 #define SMCR    _SFR_IO8(0x33)
-#define SM2     3
-#define SM1     2
-#define SM0     1
-#define SE      0
+constexpr auto SM2 = 3;
+constexpr auto SM1 = 2;
+constexpr auto SM0 = 1;
+constexpr auto SE = 0;
 
 #define MCUSR   _SFR_IO8(0x34)
-#define JTRF    4
-#define WDRF    3
-#define BORF    2
-#define EXTRF   1
-#define PORF    0
+constexpr auto JTRF = 4;
+constexpr auto WDRF = 3;
+constexpr auto BORF = 2;
+constexpr auto EXTRF = 1;
+constexpr auto PORF = 0;
 
 #define MCUCR   _SFR_IO8(0X35)
-#define JTD     7
-#define PUD     4
-#define IVSEL   1
-#define IVCE    0
+constexpr auto JTD = 7;
+constexpr auto PUD = 4;
+constexpr auto IVSEL = 1;
+constexpr auto IVCE = 0;
 
 /* Reserved [0x36] */
 
 #define SPMCSR  _SFR_IO8(0x37)
-#define SPMIE   7
-#define RWWSB   6
-#define SIGRD   5
-#define RWWSRE  4
-#define BLBSET  3
-#define PGWRT   2
-#define PGERS   1
-#define SPMEN   0
+constexpr auto SPMIE = 7;
+constexpr auto RWWSB = 6;
+constexpr auto SIGRD = 5;
+constexpr auto RWWSRE = 4;
+constexpr auto BLBSET = 3;
+constexpr auto PGWRT = 2;
+constexpr auto PGERS = 1;
+constexpr auto SPMEN = 0;
 
 /* Reserved [0x38..0x3A] */
 
 #define RAMPZ   _SFR_IO8(0X3B)
-#define RAMPZ0  0
+constexpr auto RAMPZ0 = 0;
 
 #define EIND    _SFR_IO8(0X3C)
-#define EIND0   0
+constexpr auto EIND0 = 0;
 
 /* SP [0x3D..0x3E] */
 /* SREG [0x3F] */
 
 #define WDTCSR  _SFR_MEM8(0x60)
-#define WDIF    7
-#define WDIE    6
-#define WDP3    5
-#define WDCE    4
-#define WDE     3
-#define WDP2    2
-#define WDP1    1
-#define WDP0    0
+constexpr auto WDIF = 7;
+constexpr auto WDIE = 6;
+constexpr auto WDP3 = 5;
+constexpr auto WDCE = 4;
+constexpr auto WDE = 3;
+constexpr auto WDP2 = 2;
+constexpr auto WDP1 = 1;
+constexpr auto WDP0 = 0;
 
 #define CLKPR   _SFR_MEM8(0x61)
-#define CLKPCE  7
-#define CLKPS3  3
-#define CLKPS2  2
-#define CLKPS1  1
-#define CLKPS0  0
+constexpr auto CLKPCE = 7;
+constexpr auto CLKPS3 = 3;
+constexpr auto CLKPS2 = 2;
+constexpr auto CLKPS1 = 1;
+constexpr auto CLKPS0 = 0;
 
 /* Reserved [0x62..0x63] */
 
 #define PRR0    _SFR_MEM8(0x64)
-#define PRTWI       7
-#define PRTIM2      6
-#define PRTIM0      5
-#define PRTIM1      3
-#define PRSPI       2
-#define PRUSART0    1
-#define PRADC       0
+constexpr auto PRTWI = 7;
+constexpr auto PRTIM2 = 6;
+constexpr auto PRTIM0 = 5;
+constexpr auto PRTIM1 = 3;
+constexpr auto PRSPI = 2;
+constexpr auto PRUSART0 = 1;
+constexpr auto PRADC = 0;
 
 #define __AVR_HAVE_PRR0	((1<<PRADC)|(1<<PRUSART0)|(1<<PRSPI)|(1<<PRTIM1)|(1<<PRTIM0)|(1<<PRTIM2)|(1<<PRTWI))
 #define __AVR_HAVE_PRR0_PRADC
@@ -508,11 +508,11 @@
 
 #define PRR1    _SFR_MEM8(0x65)
 #define PRTIM5      5
-#define PRTIM4      4
-#define PRTIM3      3
-#define PRUSART3    2
-#define PRUSART2    1
-#define PRUSART1    0
+constexpr auto PRTIM4 = 4;
+constexpr auto PRTIM3 = 3;
+constexpr auto PRUSART3 = 2;
+constexpr auto PRUSART2 = 1;
+constexpr auto PRUSART1 = 0;
 
 #define __AVR_HAVE_PRR1	((1<<PRUSART1)|(1<<PRUSART2)|(1<<PRUSART3)|(1<<PRTIM3)|(1<<PRTIM4)|(1<<PRTIM5))
 #define __AVR_HAVE_PRR1_PRUSART1
@@ -530,48 +530,48 @@
 #if defined(__ATmegaxx0__)
 # define PCIE2  2
 #endif /* __ATmegaxx0__ */
-#define PCIE1   1
-#define PCIE0   0
+constexpr auto PCIE1 = 1;
+constexpr auto PCIE0 = 0;
 
 #define EICRA   _SFR_MEM8(0x69)
-#define ISC31   7
-#define ISC30   6
-#define ISC21   5
-#define ISC20   4
-#define ISC11   3
-#define ISC10   2
-#define ISC01   1
-#define ISC00   0
+constexpr auto ISC31 = 7;
+constexpr auto ISC30 = 6;
+constexpr auto ISC21 = 5;
+constexpr auto ISC20 = 4;
+constexpr auto ISC11 = 3;
+constexpr auto ISC10 = 2;
+constexpr auto ISC01 = 1;
+constexpr auto ISC00 = 0;
 
 #define EICRB   _SFR_MEM8(0x6A)
-#define ISC71   7
-#define ISC70   6
-#define ISC61   5
-#define ISC60   4
-#define ISC51   3
-#define ISC50   2
-#define ISC41   1
-#define ISC40   0
+constexpr auto ISC71 = 7;
+constexpr auto ISC70 = 6;
+constexpr auto ISC61 = 5;
+constexpr auto ISC60 = 4;
+constexpr auto ISC51 = 3;
+constexpr auto ISC50 = 2;
+constexpr auto ISC41 = 1;
+constexpr auto ISC40 = 0;
 
 #define PCMSK0  _SFR_MEM8(0x6B)
-#define PCINT7  7
-#define PCINT6  6
-#define PCINT5  5
-#define PCINT4  4
-#define PCINT3  3
-#define PCINT2  2
-#define PCINT1  1
-#define PCINT0  0
+constexpr auto PCINT7 = 7;
+constexpr auto PCINT6 = 6;
+constexpr auto PCINT5 = 5;
+constexpr auto PCINT4 = 4;
+constexpr auto PCINT3 = 3;
+constexpr auto PCINT2 = 2;
+constexpr auto PCINT1 = 1;
+constexpr auto PCINT0 = 0;
 
 #define PCMSK1  _SFR_MEM8(0x6C)
-#define PCINT15 7
-#define PCINT14 6
-#define PCINT13 5
-#define PCINT12 4
-#define PCINT11 3
-#define PCINT10 2
-#define PCINT9  1
-#define PCINT8  0
+constexpr auto PCINT15 = 7;
+constexpr auto PCINT14 = 6;
+constexpr auto PCINT13 = 5;
+constexpr auto PCINT12 = 4;
+constexpr auto PCINT11 = 3;
+constexpr auto PCINT10 = 2;
+constexpr auto PCINT9 = 1;
+constexpr auto PCINT8 = 0;
 
 #if defined(__ATmegaxx0__) 
 # define PCMSK2 _SFR_MEM8(0x6D)
@@ -586,58 +586,58 @@
 #endif /* __ATmegaxx0__ */
 
 #define TIMSK0  _SFR_MEM8(0x6E)
-#define OCIE0B  2
-#define OCIE0A  1
-#define TOIE0   0
+constexpr auto OCIE0B = 2;
+constexpr auto OCIE0A = 1;
+constexpr auto TOIE0 = 0;
 
 #define TIMSK1  _SFR_MEM8(0x6F)
-#define ICIE1   5
-#define OCIE1C  3
-#define OCIE1B  2
-#define OCIE1A  1
-#define TOIE1   0
+constexpr auto ICIE1 = 5;
+constexpr auto OCIE1C = 3;
+constexpr auto OCIE1B = 2;
+constexpr auto OCIE1A = 1;
+constexpr auto TOIE1 = 0;
 
 #define TIMSK2  _SFR_MEM8(0x70)
-#define OCIE2B  2
-#define OCIE2A  1
-#define TOIE2   0
+constexpr auto OCIE2B = 2;
+constexpr auto OCIE2A = 1;
+constexpr auto TOIE2 = 0;
 
 #define TIMSK3  _SFR_MEM8(0x71)
-#define ICIE3   5
-#define OCIE3C  3
-#define OCIE3B  2
-#define OCIE3A  1
-#define TOIE3   0
+constexpr auto ICIE3 = 5;
+constexpr auto OCIE3C = 3;
+constexpr auto OCIE3B = 2;
+constexpr auto OCIE3A = 1;
+constexpr auto TOIE3 = 0;
 
 #define TIMSK4  _SFR_MEM8(0x72)
-#define ICIE4   5
-#define OCIE4C  3
-#define OCIE4B  2
-#define OCIE4A  1
-#define TOIE4   0
+constexpr auto ICIE4 = 5;
+constexpr auto OCIE4C = 3;
+constexpr auto OCIE4B = 2;
+constexpr auto OCIE4A = 1;
+constexpr auto TOIE4 = 0;
 
 #define TIMSK5  _SFR_MEM8(0x73)
-#define ICIE5   5
-#define OCIE5C  3
-#define OCIE5B  2
-#define OCIE5A  1
-#define TOIE5   0
+constexpr auto ICIE5 = 5;
+constexpr auto OCIE5C = 3;
+constexpr auto OCIE5B = 2;
+constexpr auto OCIE5A = 1;
+constexpr auto TOIE5 = 0;
 
 #define XMCRA   _SFR_MEM8(0x74)
-#define SRE     7
-#define SRL2    6
-#define SRL1    5
-#define SRL0    4
-#define SRW11   3
-#define SRW10   2
-#define SRW01   1
-#define SRW00   0
+constexpr auto SRE = 7;
+constexpr auto SRL2 = 6;
+constexpr auto SRL1 = 5;
+constexpr auto SRL0 = 4;
+constexpr auto SRW11 = 3;
+constexpr auto SRW10 = 2;
+constexpr auto SRW01 = 1;
+constexpr auto SRW00 = 0;
 
 #define XMCRB   _SFR_MEM8(0x75)
-#define XMBK    7
-#define XMM2    2
-#define XMM1    1
-#define XMM0    0
+constexpr auto XMBK = 7;
+constexpr auto XMM2 = 2;
+constexpr auto XMM1 = 1;
+constexpr auto XMM0 = 0;
 
 /* Reserved [0x76..0x77] */
 
@@ -650,81 +650,81 @@
 #define ADCH    _SFR_MEM8(0x79)
 
 #define ADCSRA  _SFR_MEM8(0x7A)
-#define ADEN    7
-#define ADSC    6
-#define ADATE   5
-#define ADIF    4
-#define ADIE    3
-#define ADPS2   2
-#define ADPS1   1
-#define ADPS0   0
+constexpr auto ADEN = 7;
+constexpr auto ADSC = 6;
+constexpr auto ADATE = 5;
+constexpr auto ADIF = 4;
+constexpr auto ADIE = 3;
+constexpr auto ADPS2 = 2;
+constexpr auto ADPS1 = 1;
+constexpr auto ADPS0 = 0;
 
 #define ADCSRB  _SFR_MEM8(0x7B)
-#define ACME    6
+constexpr auto ACME = 6;
 #if defined(__ATmegaxx0__)
 # define MUX5    3
 #endif /* __ATmegaxx0__ */
-#define ADTS2   2
-#define ADTS1   1
-#define ADTS0   0
+constexpr auto ADTS2 = 2;
+constexpr auto ADTS1 = 1;
+constexpr auto ADTS0 = 0;
 
 #define ADMUX   _SFR_MEM8(0x7C)
-#define REFS1   7
-#define REFS0   6
-#define ADLAR   5
-#define MUX4    4
-#define MUX3    3
-#define MUX2    2
-#define MUX1    1
-#define MUX0    0
+constexpr auto REFS1 = 7;
+constexpr auto REFS0 = 6;
+constexpr auto ADLAR = 5;
+constexpr auto MUX4 = 4;
+constexpr auto MUX3 = 3;
+constexpr auto MUX2 = 2;
+constexpr auto MUX1 = 1;
+constexpr auto MUX0 = 0;
 
 #define DIDR2   _SFR_MEM8(0x7D)
-#define ADC15D  7
-#define ADC14D  6
-#define ADC13D  5
-#define ADC12D  4
-#define ADC11D  3
-#define ADC10D  2
-#define ADC9D   1
-#define ADC8D   0
+constexpr auto ADC15D = 7;
+constexpr auto ADC14D = 6;
+constexpr auto ADC13D = 5;
+constexpr auto ADC12D = 4;
+constexpr auto ADC11D = 3;
+constexpr auto ADC10D = 2;
+constexpr auto ADC9D = 1;
+constexpr auto ADC8D = 0;
 
 #define DIDR0   _SFR_MEM8(0x7E)
-#define ADC7D   7
-#define ADC6D   6
-#define ADC5D   5
-#define ADC4D   4
-#define ADC3D   3
-#define ADC2D   2
-#define ADC1D   1
-#define ADC0D   0
+constexpr auto ADC7D = 7;
+constexpr auto ADC6D = 6;
+constexpr auto ADC5D = 5;
+constexpr auto ADC4D = 4;
+constexpr auto ADC3D = 3;
+constexpr auto ADC2D = 2;
+constexpr auto ADC1D = 1;
+constexpr auto ADC0D = 0;
 
 #define DIDR1   _SFR_MEM8(0x7F)
-#define AIN1D   1
-#define AIN0D   0
+constexpr auto AIN1D = 1;
+constexpr auto AIN0D = 0;
 
 #define TCCR1A  _SFR_MEM8(0x80)
-#define COM1A1  7
-#define COM1A0  6
-#define COM1B1  5
-#define COM1B0  4
-#define COM1C1  3
-#define COM1C0  2
-#define WGM11   1
-#define WGM10   0
+constexpr auto COM1A1 = 7;
+constexpr auto COM1A0 = 6;
+constexpr auto COM1B1 = 5;
+constexpr auto COM1B0 = 4;
+constexpr auto COM1C1 = 3;
+constexpr auto COM1C0 = 2;
+constexpr auto WGM11 = 1;
+constexpr auto WGM10 = 0;
 
 #define TCCR1B  _SFR_MEM8(0x81)
-#define ICNC1   7
-#define ICES1   6
-#define WGM13   4
-#define WGM12   3
-#define CS12    2
-#define CS11    1
-#define CS10    0
+constexpr auto ICNC1 = 7;
+constexpr auto ICES1 = 6;
+constexpr auto WGM13 = 4;
+constexpr auto WGM12 = 3;
+constexpr auto CS12 = 2;
+constexpr auto CS11 = 1;
+constexpr auto CS10 = 0;
 
 #define TCCR1C  _SFR_MEM8(0x82)
-#define FOC1A   7
-#define FOC1B   6
-#define FOC1C   5
+constexpr auto FOC1A = 7;
+constexpr auto FOC1B = 6;
+constexpr auto FOC1C = 5;
 
 /* Reserved [0x83] */
 
@@ -761,28 +761,28 @@
 /* Reserved [0x8E..0x8F] */
 
 #define TCCR3A  _SFR_MEM8(0x90)
-#define COM3A1  7
-#define COM3A0  6
-#define COM3B1  5
-#define COM3B0  4
-#define COM3C1  3
-#define COM3C0  2
-#define WGM31   1
-#define WGM30   0
+constexpr auto COM3A1 = 7;
+constexpr auto COM3A0 = 6;
+constexpr auto COM3B1 = 5;
+constexpr auto COM3B0 = 4;
+constexpr auto COM3C1 = 3;
+constexpr auto COM3C0 = 2;
+constexpr auto WGM31 = 1;
+constexpr auto WGM30 = 0;
 
 #define TCCR3B  _SFR_MEM8(0x91)
-#define ICNC3   7
-#define ICES3   6
-#define WGM33   4
-#define WGM32   3
-#define CS32    2
-#define CS31    1
-#define CS30    0
+constexpr auto ICNC3 = 7;
+constexpr auto ICES3 = 6;
+constexpr auto WGM33 = 4;
+constexpr auto WGM32 = 3;
+constexpr auto CS32 = 2;
+constexpr auto CS31 = 1;
+constexpr auto CS30 = 0;
 
 #define TCCR3C  _SFR_MEM8(0x92)
-#define FOC3A   7
-#define FOC3B   6
-#define FOC3C   5
+constexpr auto FOC3A = 7;
+constexpr auto FOC3B = 6;
+constexpr auto FOC3C = 5;
 
 /* Reserved [0x93] */
 
@@ -819,28 +819,28 @@
 /* Reserved [0x9E..0x9F] */
 
 #define TCCR4A  _SFR_MEM8(0xA0)
-#define COM4A1  7
-#define COM4A0  6
-#define COM4B1  5
-#define COM4B0  4
-#define COM4C1  3
-#define COM4C0  2
-#define WGM41   1
-#define WGM40   0
+constexpr auto COM4A1 = 7;
+constexpr auto COM4A0 = 6;
+constexpr auto COM4B1 = 5;
+constexpr auto COM4B0 = 4;
+constexpr auto COM4C1 = 3;
+constexpr auto COM4C0 = 2;
+constexpr auto WGM41 = 1;
+constexpr auto WGM40 = 0;
 
 #define TCCR4B  _SFR_MEM8(0xA1)
-#define ICNC4   7
-#define ICES4   6
-#define WGM43   4
-#define WGM42   3
-#define CS42    2
-#define CS41    1
-#define CS40    0
+constexpr auto ICNC4 = 7;
+constexpr auto ICES4 = 6;
+constexpr auto WGM43 = 4;
+constexpr auto WGM42 = 3;
+constexpr auto CS42 = 2;
+constexpr auto CS41 = 1;
+constexpr auto CS40 = 0;
 
 #define TCCR4C  _SFR_MEM8(0xA2)
-#define FOC4A   7
-#define FOC4B   6
-#define FOC4C   5
+constexpr auto FOC4A = 7;
+constexpr auto FOC4B = 6;
+constexpr auto FOC4C = 5;
 
 /* Reserved [0xA3] */
 
@@ -877,20 +877,20 @@
 /* Reserved [0xAE..0xAF] */
 
 #define TCCR2A  _SFR_MEM8(0xB0)
-#define COM2A1  7
-#define COM2A0  6
-#define COM2B1  5
-#define COM2B0  4
-#define WGM21   1
-#define WGM20   0
+constexpr auto COM2A1 = 7;
+constexpr auto COM2A0 = 6;
+constexpr auto COM2B1 = 5;
+constexpr auto COM2B0 = 4;
+constexpr auto WGM21 = 1;
+constexpr auto WGM20 = 0;
 
 #define TCCR2B  _SFR_MEM8(0xB1)
-#define FOC2A   7
-#define FOC2B   6
-#define WGM22   3
-#define CS22    2
-#define CS21    1
-#define CS20    0
+constexpr auto FOC2A = 7;
+constexpr auto FOC2B = 6;
+constexpr auto WGM22 = 3;
+constexpr auto CS22 = 2;
+constexpr auto CS21 = 1;
+constexpr auto CS20 = 0;
 
 #define TCNT2   _SFR_MEM8(0xB2)
 
@@ -901,88 +901,88 @@
 /* Reserved [0xB5] */
 
 #define ASSR    _SFR_MEM8(0xB6)
-#define EXCLK   6
-#define AS2     5
-#define TCN2UB  4
-#define OCR2AUB 3
-#define OCR2BUB 2
-#define TCR2AUB 1
-#define TCR2BUB 0
+constexpr auto EXCLK = 6;
+constexpr auto AS2 = 5;
+constexpr auto TCN2UB = 4;
+constexpr auto OCR2AUB = 3;
+constexpr auto OCR2BUB = 2;
+constexpr auto TCR2AUB = 1;
+constexpr auto TCR2BUB = 0;
 
 /* Reserved [0xB7] */
 
 #define TWBR    _SFR_MEM8(0xB8)
 
 #define TWSR    _SFR_MEM8(0xB9)
-#define TWS7    7
-#define TWS6    6
-#define TWS5    5
-#define TWS4    4
-#define TWS3    3
-#define TWPS1   1
-#define TWPS0   0
+constexpr auto TWS7 = 7;
+constexpr auto TWS6 = 6;
+constexpr auto TWS5 = 5;
+constexpr auto TWS4 = 4;
+constexpr auto TWS3 = 3;
+constexpr auto TWPS1 = 1;
+constexpr auto TWPS0 = 0;
 
 #define TWAR    _SFR_MEM8(0xBA)
-#define TWA6    7
-#define TWA5    6
-#define TWA4    5
-#define TWA3    4
-#define TWA2    3
-#define TWA1    2
-#define TWA0    1
-#define TWGCE   0
+constexpr auto TWA6 = 7;
+constexpr auto TWA5 = 6;
+constexpr auto TWA4 = 5;
+constexpr auto TWA3 = 4;
+constexpr auto TWA2 = 3;
+constexpr auto TWA1 = 2;
+constexpr auto TWA0 = 1;
+constexpr auto TWGCE = 0;
 
 #define TWDR    _SFR_MEM8(0xBB)
 
 #define TWCR    _SFR_MEM8(0xBC)
-#define TWINT   7
-#define TWEA    6
-#define TWSTA   5
-#define TWSTO   4
-#define TWWC    3
-#define TWEN    2
-#define TWIE    0
+constexpr auto TWINT = 7;
+constexpr auto TWEA = 6;
+constexpr auto TWSTA = 5;
+constexpr auto TWSTO = 4;
+constexpr auto TWWC = 3;
+constexpr auto TWEN = 2;
+constexpr auto TWIE = 0;
 
 #define TWAMR   _SFR_MEM8(0xBD)
-#define TWAM6   7
-#define TWAM5   6
-#define TWAM4   5
-#define TWAM3   4
-#define TWAM2   3
-#define TWAM1   2
-#define TWAM0   1
+constexpr auto TWAM6 = 7;
+constexpr auto TWAM5 = 6;
+constexpr auto TWAM4 = 5;
+constexpr auto TWAM3 = 4;
+constexpr auto TWAM2 = 3;
+constexpr auto TWAM1 = 2;
+constexpr auto TWAM0 = 1;
 
 /* Reserved [0xBE..0xBF] */
 
 #define UCSR0A  _SFR_MEM8(0xC0)
-#define RXC0    7
-#define TXC0    6
-#define UDRE0   5
-#define FE0     4
-#define DOR0    3
-#define UPE0    2
-#define U2X0    1
-#define MPCM0   0
+constexpr auto RXC0 = 7;
+constexpr auto TXC0 = 6;
+constexpr auto UDRE0 = 5;
+constexpr auto FE0 = 4;
+constexpr auto DOR0 = 3;
+constexpr auto UPE0 = 2;
+constexpr auto U2X0 = 1;
+constexpr auto MPCM0 = 0;
 
 #define UCSR0B  _SFR_MEM8(0XC1)
-#define RXCIE0  7
-#define TXCIE0  6
-#define UDRIE0  5
-#define RXEN0   4
-#define TXEN0   3
-#define UCSZ02  2
-#define RXB80   1
-#define TXB80   0
+constexpr auto RXCIE0 = 7;
+constexpr auto TXCIE0 = 6;
+constexpr auto UDRIE0 = 5;
+constexpr auto RXEN0 = 4;
+constexpr auto TXEN0 = 3;
+constexpr auto UCSZ02 = 2;
+constexpr auto RXB80 = 1;
+constexpr auto TXB80 = 0;
 
 #define UCSR0C  _SFR_MEM8(0xC2)
-#define UMSEL01 7
-#define UMSEL00 6
-#define UPM01   5
-#define UPM00   4
-#define USBS0   3
-#define UCSZ01  2
-#define UCSZ00  1
-#define UCPOL0  0
+constexpr auto UMSEL01 = 7;
+constexpr auto UMSEL00 = 6;
+constexpr auto UPM01 = 5;
+constexpr auto UPM00 = 4;
+constexpr auto USBS0 = 3;
+constexpr auto UCSZ01 = 2;
+constexpr auto UCSZ00 = 1;
+constexpr auto UCPOL0 = 0;
 
 /* Reserved [0xC3] */
 
@@ -997,34 +997,34 @@
 /* Reserved [0xC7] */
 
 #define UCSR1A  _SFR_MEM8(0xC8)
-#define RXC1    7
-#define TXC1    6
-#define UDRE1   5
-#define FE1     4
-#define DOR1    3
-#define UPE1    2
-#define U2X1    1
-#define MPCM1   0
+constexpr auto RXC1 = 7;
+constexpr auto TXC1 = 6;
+constexpr auto UDRE1 = 5;
+constexpr auto FE1 = 4;
+constexpr auto DOR1 = 3;
+constexpr auto UPE1 = 2;
+constexpr auto U2X1 = 1;
+constexpr auto MPCM1 = 0;
 
 #define UCSR1B  _SFR_MEM8(0XC9)
-#define RXCIE1  7
-#define TXCIE1  6
-#define UDRIE1  5
-#define RXEN1   4
-#define TXEN1   3
-#define UCSZ12  2
-#define RXB81   1
-#define TXB81   0
+constexpr auto RXCIE1 = 7;
+constexpr auto TXCIE1 = 6;
+constexpr auto UDRIE1 = 5;
+constexpr auto RXEN1 = 4;
+constexpr auto TXEN1 = 3;
+constexpr auto UCSZ12 = 2;
+constexpr auto RXB81 = 1;
+constexpr auto TXB81 = 0;
 
 #define UCSR1C  _SFR_MEM8(0xCA)
-#define UMSEL11 7
-#define UMSEL10 6
-#define UPM11   5
-#define UPM10   4
-#define USBS1   3
-#define UCSZ11  2
-#define UCSZ10  1
-#define UCPOL1  0
+constexpr auto UMSEL11 = 7;
+constexpr auto UMSEL10 = 6;
+constexpr auto UPM11 = 5;
+constexpr auto UPM10 = 4;
+constexpr auto USBS1 = 3;
+constexpr auto UCSZ11 = 2;
+constexpr auto UCSZ10 = 1;
+constexpr auto UCPOL1 = 0;
 
 /* Reserved [0xCB] */
 
@@ -1211,28 +1211,28 @@
 /* Reserved [0x10C..0x11F] */
 
 #define TCCR5A  _SFR_MEM8(0x120)
-#define COM5A1  7
-#define COM5A0  6
-#define COM5B1  5
-#define COM5B0  4
-#define COM5C1  3
-#define COM5C0  2
-#define WGM51   1
-#define WGM50   0
+constexpr auto COM5A1 = 7;
+constexpr auto COM5A0 = 6;
+constexpr auto COM5B1 = 5;
+constexpr auto COM5B0 = 4;
+constexpr auto COM5C1 = 3;
+constexpr auto COM5C0 = 2;
+constexpr auto WGM51 = 1;
+constexpr auto WGM50 = 0;
 
 #define TCCR5B  _SFR_MEM8(0x121)
-#define ICNC5   7
-#define ICES5   6
-#define WGM53   4
-#define WGM52   3
-#define CS52    2
-#define CS51    1
-#define CS50    0
+constexpr auto ICNC5 = 7;
+constexpr auto ICES5 = 6;
+constexpr auto WGM53 = 4;
+constexpr auto WGM52 = 3;
+constexpr auto CS52 = 2;
+constexpr auto CS51 = 1;
+constexpr auto CS50 = 0;
 
 #define TCCR5C  _SFR_MEM8(0x122)
-#define FOC5A   7
-#define FOC5B   6
-#define FOC5C   5
+constexpr auto FOC5A = 7;
+constexpr auto FOC5B = 6;
+constexpr auto FOC5C = 5;
 
 /* Reserved [0x123] */
 
@@ -1317,47 +1317,47 @@
 /* Interrupt vectors */
 /* Vector 0 is the reset vector */
 /* External Interrupt Request 0 */
-#define INT0_vect_num		1
+constexpr auto INT0_vect_num = 1;
 #define INT0_vect			_VECTOR(1)
 #define SIG_INTERRUPT0			_VECTOR(1)
 
 /* External Interrupt Request 1 */
-#define INT1_vect_num		2
+constexpr auto INT1_vect_num = 2;
 #define INT1_vect			_VECTOR(2)
 #define SIG_INTERRUPT1			_VECTOR(2)
 
 /* External Interrupt Request 2 */
-#define INT2_vect_num		3
+constexpr auto INT2_vect_num = 3;
 #define INT2_vect			_VECTOR(3)
 #define SIG_INTERRUPT2			_VECTOR(3)
 
 /* External Interrupt Request 3 */
-#define INT3_vect_num		4
+constexpr auto INT3_vect_num = 4;
 #define INT3_vect			_VECTOR(4)
 #define SIG_INTERRUPT3			_VECTOR(4)
 
 /* External Interrupt Request 4 */
-#define INT4_vect_num		5
+constexpr auto INT4_vect_num = 5;
 #define INT4_vect			_VECTOR(5)
 #define SIG_INTERRUPT4			_VECTOR(5)
 
 /* External Interrupt Request 5 */
-#define INT5_vect_num		6
+constexpr auto INT5_vect_num = 6;
 #define INT5_vect			_VECTOR(6)
 #define SIG_INTERRUPT5			_VECTOR(6)
 
 /* External Interrupt Request 6 */
-#define INT6_vect_num		7
+constexpr auto INT6_vect_num = 7;
 #define INT6_vect			_VECTOR(7)
 #define SIG_INTERRUPT6			_VECTOR(7)
 
 /* External Interrupt Request 7 */
-#define INT7_vect_num		8
+constexpr auto INT7_vect_num = 8;
 #define INT7_vect			_VECTOR(8)
 #define SIG_INTERRUPT7			_VECTOR(8)
 
 /* Pin Change Interrupt Request 0 */
-#define PCINT0_vect_num		9
+constexpr auto PCINT0_vect_num = 9;
 #define PCINT0_vect			_VECTOR(9)
 #define SIG_PIN_CHANGE0			_VECTOR(9)
 
