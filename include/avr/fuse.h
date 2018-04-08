@@ -228,35 +228,34 @@
 
 #if FUSE_MEMORY_SIZE > 3
 
-typedef struct
+struct __fuse_t
 {
     unsigned char byte[FUSE_MEMORY_SIZE];
-} __fuse_t;
-
+};
 
 #elif FUSE_MEMORY_SIZE == 3
 
-typedef struct
+struct __fuse_t
 {
     unsigned char low;
     unsigned char high;
     unsigned char extended;
-} __fuse_t;
+};
 
 #elif FUSE_MEMORY_SIZE == 2
 
-typedef struct
+struct __fuse_t
 {
     unsigned char low;
     unsigned char high;
-} __fuse_t;
+};
 
 #elif FUSE_MEMORY_SIZE == 1
 
-typedef struct
+struct __fuse_t
 {
     unsigned char byte;
-} __fuse_t;
+};
 
 #endif
 
