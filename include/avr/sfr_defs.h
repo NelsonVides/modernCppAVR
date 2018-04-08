@@ -44,13 +44,13 @@ namespace Vavr {
 #ifndef __ASSEMBLER__
     /* These only work in C programs.  */
 #include <inttypes.h>
-    constexpr auto _MMIO_BYTE(auto mem_addr) {
+    constexpr volatile uint8_t _MMIO_BYTE(auto mem_addr) {
         return (*(volatile uint8_t *)(mem_addr));
     }
-    constexpr auto _MMIO_WORD(auto mem_addr) {
+    constexpr volatile uint16_t _MMIO_WORD(auto mem_addr) {
         return (*(volatile uint16_t *)(mem_addr));
     }
-    constexpr auto _MMIO_DWORD(auto mem_addr) {
+    constexpr volatile uint32_t _MMIO_DWORD(auto mem_addr) {
         return (*(volatile uint32_t *)(mem_addr));
     }
 #endif
@@ -104,7 +104,7 @@ constexpr auto _SFR_MEM32(auto mem_addr) { return _MMIO_DWORD(mem_addr);}
 constexpr auto _SFR_IO8(auto io_addr) { return _MMIO_BYTE(io_addr) + __SFR_OFFSET;}
 constexpr auto _SFR_IO16(auto io_addr) { return _MMIO_WORD(io_addr) + __SFR_OFFSET;}
 
-constexpr auto _SFR_MEM_ADDR(auto sfr) { return (uint16_t) &sfr;}
+constexpr uint16_t _SFR_MEM_ADDR(auto sfr) { return (uint16_t) &sfr;}
 constexpr auto _SFR_IO_ADDR(auto sfr) { return _SFR_MEM_ADDR(sfr) - __SFR_OFFSET;}
 constexpr auto _SFR_IO_REG_P(auto sfr) { return _SFR_MEM_ADDR(sfr) < 0x40 + __SFR_OFFSET;}
 
