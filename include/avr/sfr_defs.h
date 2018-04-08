@@ -130,7 +130,7 @@ constexpr auto _SFR_DWORD(auto sfr) { return _MMIO_DWORD(_SFR_ADDR(sfr));}
     result into the code. Thus, there is no run-time overhead when using
     _BV(). */
     
-constexpr auto _BV(auto bit) { return 1 << bit; }
+constexpr auto _BV(auto bit) { return 1 << bit; } __attribute__((always_inline))
 
 /*@}*/
 
@@ -152,7 +152,7 @@ constexpr auto _BV(auto bit) { return 1 << bit; }
     This will return a 0 if the bit is clear, and non-zero
     if the bit is set. */
 
-constexpr auto bit_is_set(auto sfr, auto bit){ return _SFR_BYTE(sfr) & _BV(bit);}
+constexpr auto bit_is_set(auto sfr, auto bit){ return _SFR_BYTE(sfr) & _BV(bit);} __attribute__((always_inline))
 
 /** \def bit_is_clear
     \ingroup avr_sfr
@@ -161,7 +161,7 @@ constexpr auto bit_is_set(auto sfr, auto bit){ return _SFR_BYTE(sfr) & _BV(bit);
     This will return non-zero if the bit is clear, and a 0
     if the bit is set. */
 
-constexpr auto bit_is_clear(auto sfr, auto bit) { return (!(_SFR_BYTE(sfr) & _BV(bit)));}
+constexpr auto bit_is_clear(auto sfr, auto bit) { return (!(_SFR_BYTE(sfr) & _BV(bit)));} __attribute__((always_inline))
 
 /** \def loop_until_bit_is_set
     \ingroup avr_sfr
