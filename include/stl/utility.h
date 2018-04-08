@@ -51,6 +51,21 @@ template<typename T>
 inline constexpr typename enable_if<is_lvalue_reference<T>::value, T>::type
 forward(remove_reference_t<T>&& t) = delete;
 
+/**
+ * * @brief Check if a given value is in a specific range
+ * * @param value The value to check
+ * * @param low The lower bound (inclusive)
+ * * @param high The upper bound (inclusive)
+ * * @since 1.0.0
+ * */
+template<typename ValueType, enable_if_t<is_integral<remove_reference_t<ValueType>>::value  > >
+constexpr auto in_range(ValueType value, ValueType low, ValueType high)
+{ 
+    return value >= low && value <= high; 
+}
+
+
+
 } /* end of namespace stl */
 
 #endif
