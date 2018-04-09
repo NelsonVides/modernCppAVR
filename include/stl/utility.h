@@ -58,7 +58,7 @@ forward(remove_reference_t<T>&& t) = delete;
  * * @param high The upper bound (inclusive)
  * * @since 1.0.0
  * */
-template<typename ValueType, enable_if_t<is_integral<remove_reference_t<ValueType>>::value  > >
+template<typename ValueType> //, enable_if_t<is_integral<remove_reference_t<ValueType>>::value  > >
 constexpr auto in_range(ValueType value, ValueType low, ValueType high)
 { 
     return value >= low && value <= high; 

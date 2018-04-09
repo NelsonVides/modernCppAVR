@@ -2,6 +2,7 @@
 #define _TYPE_TRAITS_H_
 
 #include<stdlib.h>
+#include<stddef.h>
 
 namespace stl {
 
