@@ -37,6 +37,8 @@
 
 #include <avr/iomxx0_1.h>
 
+namespace vAVR {
+
 /* Constants */
 constexpr auto SPM_PAGESIZE = 256;
 constexpr auto RAMSTART = 0x200;
@@ -52,32 +54,32 @@ constexpr auto FLASHEND = 0x3FFFF;
 constexpr auto FUSE_MEMORY_SIZE = 3;
 
 /* Low Fuse Byte */
-constexpr unsigned char FUSE_CKSEL0 = ~_BV(0);
-constexpr unsigned char FUSE_CKSEL1 = ~_BV(1);
-constexpr unsigned char FUSE_CKSEL2 = ~_BV(2);
-constexpr unsigned char FUSE_CKSEL3 = ~_BV(3);
-constexpr unsigned char FUSE_SUT0 = ~_BV(4);
-constexpr unsigned char FUSE_SUT1 = ~_BV(5);
-constexpr unsigned char FUSE_CKOUT = ~_BV(6);
-constexpr unsigned char FUSE_CKDIV8 = ~_BV(7);
-constexpr auto LFUSE_DEFAULT = (FUSE_CKSEL0 & FUSE_CKSEL2 & FUSE_CKSEL3 & FUSE_SUT0 & FUSE_CKDIV8);
+constexpr auto FUSE_CKSEL0   = static_cast<unsigned char>(~_BV(0x00));
+constexpr auto FUSE_CKSEL1   = static_cast<unsigned char>(~_BV(0x01));
+constexpr auto FUSE_CKSEL2   = static_cast<unsigned char>(~_BV(0x02));
+constexpr auto FUSE_CKSEL3   = static_cast<unsigned char>(~_BV(0x03));
+constexpr auto FUSE_SUT0     = static_cast<unsigned char>(~_BV(0x04));
+constexpr auto FUSE_SUT1     = static_cast<unsigned char>(~_BV(0x05));
+constexpr auto FUSE_CKOUT    = static_cast<unsigned char>(~_BV(0x06));
+constexpr auto FUSE_CKDIV8   = static_cast<unsigned char>(~_BV(0x07));
+constexpr auto LFUSE_DEFAULT = static_cast<unsigned char>(FUSE_CKSEL0 & FUSE_CKSEL2 & FUSE_CKSEL3 & FUSE_SUT0 & FUSE_CKDIV8);
 
 /* High Fuse Byte */
-constexpr unsigned char FUSE_BOOTRST = ~_BV(0);
-constexpr unsigned char FUSE_BOOTSZ0 = ~_BV(1);
-constexpr unsigned char FUSE_BOOTSZ1 = ~_BV(2);
-constexpr unsigned char FUSE_EESAVE = ~_BV(3);
-constexpr unsigned char FUSE_WDTON = ~_BV(4);
-constexpr unsigned char FUSE_SPIEN = ~_BV(5);
-constexpr unsigned char FUSE_JTAGEN = ~_BV(6);
-constexpr unsigned char FUSE_OCDEN = ~_BV(7);
-constexpr auto HFUSE_DEFAULT = (FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_SPIEN & FUSE_JTAGEN);
+constexpr auto FUSE_BOOTRST  = static_cast<unsigned char>(~_BV(0x00));
+constexpr auto FUSE_BOOTSZ0  = static_cast<unsigned char>(~_BV(0x01));
+constexpr auto FUSE_BOOTSZ1  = static_cast<unsigned char>(~_BV(0x02));
+constexpr auto FUSE_EESAVE   = static_cast<unsigned char>(~_BV(0x03));
+constexpr auto FUSE_WDTON    = static_cast<unsigned char>(~_BV(0x04));
+constexpr auto FUSE_SPIEN    = static_cast<unsigned char>(~_BV(0x05));
+constexpr auto FUSE_JTAGEN   = static_cast<unsigned char>(~_BV(0x06));
+constexpr auto FUSE_OCDEN    = static_cast<unsigned char>(~_BV(0x07));
+constexpr auto HFUSE_DEFAULT = static_cast<unsigned char>(FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_SPIEN & FUSE_JTAGEN);
 
 /* Extended Fuse Byte */
-constexpr unsigned char FUSE_BODLEVEL0 = ~_BV(0);
-constexpr unsigned char FUSE_BODLEVEL1 = ~_BV(1);
-constexpr unsigned char FUSE_BODLEVEL2 = ~_BV(2);
-constexpr auto EFUSE_DEFAULT = (0xFF);
+constexpr auto FUSE_BODLEVEL0 = static_cast<unsigned char>(~_BV(0x00));
+constexpr auto FUSE_BODLEVEL1 = static_cast<unsigned char>(~_BV(0x01));
+constexpr auto FUSE_BODLEVEL2 = static_cast<unsigned char>(~_BV(0x02));
+constexpr auto EFUSE_DEFAULT  = static_cast<unsigned char>(0xFF);
 
 
 /* Lock Bits */
@@ -91,11 +93,14 @@ constexpr auto SIGNATURE_0 = 0x1E;
 constexpr auto SIGNATURE_1 = 0x98;
 constexpr auto SIGNATURE_2 = 0x01;
 
-constexpr auto SLEEP_MODE_IDLE = (0x00<<1);
-constexpr auto SLEEP_MODE_ADC = (0x01<<1);
-constexpr auto SLEEP_MODE_PWR_DOWN = (0x02<<1);
-constexpr auto SLEEP_MODE_PWR_SAVE = (0x03<<1);
-constexpr auto SLEEP_MODE_STANDBY = (0x06<<1);
-constexpr auto SLEEP_MODE_EXT_STANDBY = (0x07<<1);
+constexpr auto SLEEP_MODE_IDLE        = static_cast<unsigned char>(0x00<<1);
+constexpr auto SLEEP_MODE_ADC         = static_cast<unsigned char>(0x01<<1);
+constexpr auto SLEEP_MODE_PWR_DOWN    = static_cast<unsigned char>(0x02<<1);
+constexpr auto SLEEP_MODE_PWR_SAVE    = static_cast<unsigned char>(0x03<<1);
+constexpr auto SLEEP_MODE_STANDBY     = static_cast<unsigned char>(0x06<<1);
+constexpr auto SLEEP_MODE_EXT_STANDBY = static_cast<unsigned char>(0x07<<1);
+
+} /* end of namespace vAVR */
 
 #endif /* _AVR_IOM2560_H_ */
+

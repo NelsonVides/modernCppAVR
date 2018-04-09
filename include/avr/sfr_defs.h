@@ -31,9 +31,9 @@
 /* avr/sfr_defs.h - macros for accessing AVR special function registers */
 
 #ifndef _AVR_SFR_DEFS_H_
-#define _AVR_SFR_DEFS_H_1_
+#define _AVR_SFR_DEFS_H_
 
-namespace Vavr {
+namespace vAVR {
 
 #ifdef __ASSEMBLER__
 #define _SFR_ASM_COMPAT 1
@@ -44,13 +44,13 @@ namespace Vavr {
 #ifndef __ASSEMBLER__
     /* These only work in C programs.  */
 #include <inttypes.h>
-    constexpr volatile uint8_t _MMIO_BYTE(auto mem_addr) {
+    constexpr uint8_t _MMIO_BYTE(uint8_t mem_addr) {
         return (*(volatile uint8_t *)(mem_addr));
     }
-    constexpr volatile uint16_t _MMIO_WORD(auto mem_addr) {
+    constexpr uint16_t _MMIO_WORD(uint16_t mem_addr) {
         return (*(volatile uint16_t *)(mem_addr));
     }
-    constexpr volatile uint32_t _MMIO_DWORD(auto mem_addr) {
+    constexpr uint32_t _MMIO_DWORD(uint32_t mem_addr) {
         return (*(volatile uint32_t *)(mem_addr));
     }
 #endif
@@ -129,8 +129,10 @@ constexpr auto _SFR_DWORD(auto sfr) { return _MMIO_DWORD(_SFR_ADDR(sfr));}
     \note The bit shift is performed by the compiler which then inserts the
     result into the code. Thus, there is no run-time overhead when using
     _BV(). */
-    
-constexpr auto _BV(auto bit) { return 1 << bit; } __attribute__((always_inline))
+
+//uint8_t operator~(uint8_t bit) { return reinterpret_cast<uint8_t>~bit; }
+constexpr uint8_t _BV(uint8_t bit) { return 1 << bit; } __attribute__((always_inline))
+//constexpr auto _BV(auto bit) { return 1 << bit; } __attribute__((always_inline))
 
 /*@}*/
 
