@@ -44,15 +44,15 @@ namespace vAVR {
 #ifndef __ASSEMBLER__
     /* These only work in C programs.  */
 #include <inttypes.h>
-    constexpr uint8_t _MMIO_BYTE(uint8_t mem_addr) {
+    static inline uint8_t _MMIO_BYTE(uint8_t mem_addr) {
         return (*(volatile uint8_t *)(mem_addr));
-    }
-    constexpr uint16_t _MMIO_WORD(uint16_t mem_addr) {
+    } __attribute__((always_inline))
+    static inline uint16_t _MMIO_WORD(uint16_t mem_addr) {
         return (*(volatile uint16_t *)(mem_addr));
-    }
-    constexpr uint32_t _MMIO_DWORD(uint32_t mem_addr) {
+    } __attribute__((always_inline))
+    static inline uint32_t _MMIO_DWORD(uint32_t mem_addr) {
         return (*(volatile uint32_t *)(mem_addr));
-    }
+    } __attribute__((always_inline))
 #endif
 
 #if _SFR_ASM_COMPAT
