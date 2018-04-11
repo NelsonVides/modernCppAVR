@@ -93,7 +93,7 @@ namespace registers {
         ptrdiff_t Base, 
         stl::int_types::uint_for_size_t<8> Bits, 
         stl::int_types::uint_for_size_t<Bits> ValidBits, 
-        ptrdiff_t EffectiveAddress = Base + Address>
+        ptrdiff_t EffectiveAddress = Address>
     class special_function_register {
         static_assert(stl::in_range(EffectiveAddress, 0x20, 0xff),
                 "Address is not in Special Function Register range [0x20, 0xff]");
