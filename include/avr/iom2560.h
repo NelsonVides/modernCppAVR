@@ -38,69 +38,75 @@
 #include <avr/iomxx0_1.h>
 
 namespace vAVR {
+    namespace internal {
+        namespace controllers {
 
-/* Constants */
-constexpr auto SPM_PAGESIZE = 256;
-constexpr auto RAMSTART = 0x200;
-constexpr auto RAMEND = 0x21FF;
-constexpr auto XRAMEND = 0xFFFF;
-constexpr auto E2END = 0xFFF;
-constexpr auto E2PAGESIZE = 8;
-constexpr auto FLASHEND = 0x3FFFF;
+    struct mega2560 : megaxx01 {
+        ~mega2560() = delete;
 
-
-/* Fuses */
-
-constexpr auto FUSE_MEMORY_SIZE = 3;
-
-/* Low Fuse Byte */
-constexpr auto FUSE_CKSEL0   = static_cast<unsigned char>(~_BV(0x00));
-constexpr auto FUSE_CKSEL1   = static_cast<unsigned char>(~_BV(0x01));
-constexpr auto FUSE_CKSEL2   = static_cast<unsigned char>(~_BV(0x02));
-constexpr auto FUSE_CKSEL3   = static_cast<unsigned char>(~_BV(0x03));
-constexpr auto FUSE_SUT0     = static_cast<unsigned char>(~_BV(0x04));
-constexpr auto FUSE_SUT1     = static_cast<unsigned char>(~_BV(0x05));
-constexpr auto FUSE_CKOUT    = static_cast<unsigned char>(~_BV(0x06));
-constexpr auto FUSE_CKDIV8   = static_cast<unsigned char>(~_BV(0x07));
-constexpr auto LFUSE_DEFAULT = static_cast<unsigned char>(FUSE_CKSEL0 & FUSE_CKSEL2 & FUSE_CKSEL3 & FUSE_SUT0 & FUSE_CKDIV8);
-
-/* High Fuse Byte */
-constexpr auto FUSE_BOOTRST  = static_cast<unsigned char>(~_BV(0x00));
-constexpr auto FUSE_BOOTSZ0  = static_cast<unsigned char>(~_BV(0x01));
-constexpr auto FUSE_BOOTSZ1  = static_cast<unsigned char>(~_BV(0x02));
-constexpr auto FUSE_EESAVE   = static_cast<unsigned char>(~_BV(0x03));
-constexpr auto FUSE_WDTON    = static_cast<unsigned char>(~_BV(0x04));
-constexpr auto FUSE_SPIEN    = static_cast<unsigned char>(~_BV(0x05));
-constexpr auto FUSE_JTAGEN   = static_cast<unsigned char>(~_BV(0x06));
-constexpr auto FUSE_OCDEN    = static_cast<unsigned char>(~_BV(0x07));
-constexpr auto HFUSE_DEFAULT = static_cast<unsigned char>(FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_SPIEN & FUSE_JTAGEN);
-
-/* Extended Fuse Byte */
-constexpr auto FUSE_BODLEVEL0 = static_cast<unsigned char>(~_BV(0x00));
-constexpr auto FUSE_BODLEVEL1 = static_cast<unsigned char>(~_BV(0x01));
-constexpr auto FUSE_BODLEVEL2 = static_cast<unsigned char>(~_BV(0x02));
-constexpr auto EFUSE_DEFAULT  = static_cast<unsigned char>(0xFF);
+        /* Constants */
+        static constexpr auto SPM_PAGESIZE = 256;
+        static constexpr auto RAMSTART = 0x200;
+        static constexpr auto RAMEND = 0x21FF;
+        static constexpr auto XRAMEND = 0xFFFF;
+        static constexpr auto E2END = 0xFFF;
+        static constexpr auto E2PAGESIZE = 8;
+        static constexpr auto FLASHEND = 0x3FFFF;
 
 
-/* Lock Bits */
+        /* Fuses */
+
+        static constexpr auto FUSE_MEMORY_SIZE = 3;
+
+        /* Low Fuse Byte */
+        static constexpr auto FUSE_CKSEL0   = static_cast<unsigned char>(~_BV(0x00));
+        static constexpr auto FUSE_CKSEL1   = static_cast<unsigned char>(~_BV(0x01));
+        static constexpr auto FUSE_CKSEL2   = static_cast<unsigned char>(~_BV(0x02));
+        static constexpr auto FUSE_CKSEL3   = static_cast<unsigned char>(~_BV(0x03));
+        static constexpr auto FUSE_SUT0     = static_cast<unsigned char>(~_BV(0x04));
+        static constexpr auto FUSE_SUT1     = static_cast<unsigned char>(~_BV(0x05));
+        static constexpr auto FUSE_CKOUT    = static_cast<unsigned char>(~_BV(0x06));
+        static constexpr auto FUSE_CKDIV8   = static_cast<unsigned char>(~_BV(0x07));
+        static constexpr auto LFUSE_DEFAULT = static_cast<unsigned char>(FUSE_CKSEL0 & FUSE_CKSEL2 & FUSE_CKSEL3 & FUSE_SUT0 & FUSE_CKDIV8);
+
+        /* High Fuse Byte */
+        static constexpr auto FUSE_BOOTRST  = static_cast<unsigned char>(~_BV(0x00));
+        static constexpr auto FUSE_BOOTSZ0  = static_cast<unsigned char>(~_BV(0x01));
+        static constexpr auto FUSE_BOOTSZ1  = static_cast<unsigned char>(~_BV(0x02));
+        static constexpr auto FUSE_EESAVE   = static_cast<unsigned char>(~_BV(0x03));
+        static constexpr auto FUSE_WDTON    = static_cast<unsigned char>(~_BV(0x04));
+        static constexpr auto FUSE_SPIEN    = static_cast<unsigned char>(~_BV(0x05));
+        static constexpr auto FUSE_JTAGEN   = static_cast<unsigned char>(~_BV(0x06));
+        static constexpr auto FUSE_OCDEN    = static_cast<unsigned char>(~_BV(0x07));
+        static constexpr auto HFUSE_DEFAULT = static_cast<unsigned char>(FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_SPIEN & FUSE_JTAGEN);
+
+        /* Extended Fuse Byte */
+        static constexpr auto FUSE_BODLEVEL0 = static_cast<unsigned char>(~_BV(0x00));
+        static constexpr auto FUSE_BODLEVEL1 = static_cast<unsigned char>(~_BV(0x01));
+        static constexpr auto FUSE_BODLEVEL2 = static_cast<unsigned char>(~_BV(0x02));
+        static constexpr auto EFUSE_DEFAULT  = static_cast<unsigned char>(0xFF);
+
+
+        /* Lock Bits */
 #define __LOCK_BITS_EXIST
 #define __BOOT_LOCK_BITS_0_EXIST
 #define __BOOT_LOCK_BITS_1_EXIST 
 
 
-/* Signature */
-constexpr auto SIGNATURE_0 = 0x1E;
-constexpr auto SIGNATURE_1 = 0x98;
-constexpr auto SIGNATURE_2 = 0x01;
+        /* Signature */
+        static constexpr auto SIGNATURE_0 = 0x1E;
+        static constexpr auto SIGNATURE_1 = 0x98;
+        static constexpr auto SIGNATURE_2 = 0x01;
 
-constexpr auto SLEEP_MODE_IDLE        = static_cast<unsigned char>(0x00<<1);
-constexpr auto SLEEP_MODE_ADC         = static_cast<unsigned char>(0x01<<1);
-constexpr auto SLEEP_MODE_PWR_DOWN    = static_cast<unsigned char>(0x02<<1);
-constexpr auto SLEEP_MODE_PWR_SAVE    = static_cast<unsigned char>(0x03<<1);
-constexpr auto SLEEP_MODE_STANDBY     = static_cast<unsigned char>(0x06<<1);
-constexpr auto SLEEP_MODE_EXT_STANDBY = static_cast<unsigned char>(0x07<<1);
+        static constexpr auto SLEEP_MODE_IDLE        = static_cast<unsigned char>(0x00<<1);
+        static constexpr auto SLEEP_MODE_ADC         = static_cast<unsigned char>(0x01<<1);
+        static constexpr auto SLEEP_MODE_PWR_DOWN    = static_cast<unsigned char>(0x02<<1);
+        static constexpr auto SLEEP_MODE_PWR_SAVE    = static_cast<unsigned char>(0x03<<1);
+        static constexpr auto SLEEP_MODE_STANDBY     = static_cast<unsigned char>(0x06<<1);
+        static constexpr auto SLEEP_MODE_EXT_STANDBY = static_cast<unsigned char>(0x07<<1);
+    };
 
-} /* end of namespace vAVR */
+}}} /* end of namespace vAVR */
 
 #endif /* _AVR_IOM2560_H_ */
 

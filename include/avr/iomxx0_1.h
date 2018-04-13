@@ -38,8 +38,6 @@
 
 /* This file should only be included from <avr/io.h>, never directly. */
 
-namespace vAVR {
-
 #ifndef _AVR_IO_H_
 #  error "Include <avr/io.h> instead of this file."
 #endif
@@ -56,420 +54,416 @@ namespace vAVR {
 # define __ATmegaxx1__
 #endif
 
+#include "registers.h"
+
+namespace vAVR {
+    namespace internal {
+        namespace controllers {
+
 /* Registers and associated bit numbers */
 
-#define PINA    _SFR_IO8(0X00)
-constexpr auto PINA7 = 0x07;
-constexpr auto PINA6 = 0x06;
-constexpr auto PINA5 = 0x05;
-constexpr auto PINA4 = 0x04;
-constexpr auto PINA3 = 0x03;
-constexpr auto PINA2 = 0x02;
-constexpr auto PINA1 = 0x01;
-constexpr auto PINA0 = 0x00;
+    struct megaxx01 : common::commonChip {
+        ~megaxx01() = delete;
 
-#define DDRA    _SFR_IO8(0X01)
-constexpr auto DDA7 = 0x07;
-constexpr auto DDA6 = 0x06;
-constexpr auto DDA5 = 0x05;
-constexpr auto DDA4 = 0x04;
-constexpr auto DDA3 = 0x03;
-constexpr auto DDA2 = 0x02;
-constexpr auto DDA1 = 0x01;
-constexpr auto DDA0 = 0x00;
+        using PINA = registers::pin_register<0x20, 0b11111111>;
+            using PINA0 = registers::rw_bit<PINA, 0>;
+            using PINA1 = registers::rw_bit<PINA, 1>;
+            using PINA2 = registers::rw_bit<PINA, 2>;
+            using PINA3 = registers::rw_bit<PINA, 3>;
+            using PINA4 = registers::rw_bit<PINA, 4>;
+            using PINA5 = registers::rw_bit<PINA, 5>;
+            using PINA6 = registers::rw_bit<PINA, 6>;
+            using PINA7 = registers::rw_bit<PINA, 7>;
+        using DDRA = registers::ddr_register<0x21, 0b11111111>;
+            using DDRA0 = registers::rw_bit<DDRA, 0>;
+            using DDRA1 = registers::rw_bit<DDRA, 1>;
+            using DDRA2 = registers::rw_bit<DDRA, 2>;
+            using DDRA3 = registers::rw_bit<DDRA, 3>;
+            using DDRA4 = registers::rw_bit<DDRA, 4>;
+            using DDRA5 = registers::rw_bit<DDRA, 5>;
+            using DDRA6 = registers::rw_bit<DDRA, 6>;
+            using DDRA7 = registers::rw_bit<DDRA, 7>;
+        using PORTA = registers::port_register<0x22, 0b11111111>;
+            using PORTA0 = registers::rw_bit<PORTA, 0>;
+            using PORTA1 = registers::rw_bit<PORTA, 1>;
+            using PORTA2 = registers::rw_bit<PORTA, 2>;
+            using PORTA3 = registers::rw_bit<PORTA, 3>;
+            using PORTA4 = registers::rw_bit<PORTA, 4>;
+            using PORTA5 = registers::rw_bit<PORTA, 5>;
+            using PORTA6 = registers::rw_bit<PORTA, 6>;
+            using PORTA7 = registers::rw_bit<PORTA, 7>;
 
-#define PORTA   _SFR_IO8(0X02)
-constexpr auto PA7 = 0x07;
-constexpr auto PA6 = 0x06;
-constexpr auto PA5 = 0x05;
-constexpr auto PA4 = 0x04;
-constexpr auto PA3 = 0x03;
-constexpr auto PA2 = 0x02;
-constexpr auto PA1 = 0x01;
-constexpr auto PA0 = 0x00;
+        using PINB = registers::pin_register<0x23, 0b11111111>;
+            using PINB0 = registers::rw_bit<PINB, 0>;
+            using PINB1 = registers::rw_bit<PINB, 1>;
+            using PINB2 = registers::rw_bit<PINB, 2>;
+            using PINB3 = registers::rw_bit<PINB, 3>;
+            using PINB4 = registers::rw_bit<PINB, 4>;
+            using PINB5 = registers::rw_bit<PINB, 5>;
+            using PINB6 = registers::rw_bit<PINB, 6>;
+            using PINB7 = registers::rw_bit<PINB, 7>;
+        using DDRB = registers::ddr_register<0x24, 0b11111111>;
+            using DDRB0 = registers::rw_bit<DDRB, 0>;
+            using DDRB1 = registers::rw_bit<DDRB, 1>;
+            using DDRB2 = registers::rw_bit<DDRB, 2>;
+            using DDRB3 = registers::rw_bit<DDRB, 3>;
+            using DDRB4 = registers::rw_bit<DDRB, 4>;
+            using DDRB5 = registers::rw_bit<DDRB, 5>;
+            using DDRB6 = registers::rw_bit<DDRB, 6>;
+            using DDRB7 = registers::rw_bit<DDRB, 7>;
+        using PORTB = registers::port_register<0x25, 0b11111111>;
+            using PORTB0 = registers::rw_bit<PORTB, 0>;
+            using PORTB1 = registers::rw_bit<PORTB, 1>;
+            using PORTB2 = registers::rw_bit<PORTB, 2>;
+            using PORTB3 = registers::rw_bit<PORTB, 3>;
+            using PORTB4 = registers::rw_bit<PORTB, 4>;
+            using PORTB5 = registers::rw_bit<PORTB, 5>;
+            using PORTB6 = registers::rw_bit<PORTB, 6>;
+            using PORTB7 = registers::rw_bit<PORTB, 7>;
 
-#define PINB    _SFR_IO8(0X03)
-constexpr auto PINB7 = 0x07;
-constexpr auto PINB6 = 0x06;
-constexpr auto PINB5 = 0x05;
-constexpr auto PINB4 = 0x04;
-constexpr auto PINB3 = 0x03;
-constexpr auto PINB2 = 0x02;
-constexpr auto PINB1 = 0x01;
-constexpr auto PINB0 = 0x00;
+        using PINC = registers::pin_register<0x26, 0b01111111>;
+            using PINC0 = registers::rw_bit<PINC, 0>;
+            using PINC1 = registers::rw_bit<PINC, 1>;
+            using PINC2 = registers::rw_bit<PINC, 2>;
+            using PINC3 = registers::rw_bit<PINC, 3>;
+            using PINC4 = registers::rw_bit<PINC, 4>;
+            using PINC5 = registers::rw_bit<PINC, 5>;
+            using PINC6 = registers::rw_bit<PINC, 6>;
+            using PINC7 = registers::rw_bit<PINC, 7>;
+        using DDRC = registers::ddr_register<0x27, 0b01111111>;
+            using DDRC0 = registers::rw_bit<DDRC, 0>;
+            using DDRC1 = registers::rw_bit<DDRC, 1>;
+            using DDRC2 = registers::rw_bit<DDRC, 2>;
+            using DDRC3 = registers::rw_bit<DDRC, 3>;
+            using DDRC4 = registers::rw_bit<DDRC, 4>;
+            using DDRC5 = registers::rw_bit<DDRC, 5>;
+            using DDRC6 = registers::rw_bit<DDRC, 6>;
+            using DDRC7 = registers::rw_bit<DDRC, 7>;
+        using PORTC = registers::port_register<0x28, 0b01111111>;
+            using PORTC0 = registers::rw_bit<PORTC, 0>;
+            using PORTC1 = registers::rw_bit<PORTC, 1>;
+            using PORTC2 = registers::rw_bit<PORTC, 2>;
+            using PORTC3 = registers::rw_bit<PORTC, 3>;
+            using PORTC4 = registers::rw_bit<PORTC, 4>;
+            using PORTC5 = registers::rw_bit<PORTC, 5>;
+            using PORTC6 = registers::rw_bit<PORTC, 6>;
+            using PORTC7 = registers::rw_bit<PORTC, 7>;
 
-#define DDRB    _SFR_IO8(0x04)
-constexpr auto DDB7 = 0x07;
-constexpr auto DDB6 = 0x06;
-constexpr auto DDB5 = 0x05;
-constexpr auto DDB4 = 0x04;
-constexpr auto DDB3 = 0x03;
-constexpr auto DDB2 = 0x02;
-constexpr auto DDB1 = 0x01;
-constexpr auto DDB0 = 0x00;
+        using PIND = registers::pin_register<0x29, 0b11111111>;
+            using PIND0 = registers::rw_bit<PIND, 0>;
+            using PIND1 = registers::rw_bit<PIND, 1>;
+            using PIND2 = registers::rw_bit<PIND, 2>;
+            using PIND3 = registers::rw_bit<PIND, 3>;
+            using PIND4 = registers::rw_bit<PIND, 4>;
+            using PIND5 = registers::rw_bit<PIND, 5>;
+            using PIND6 = registers::rw_bit<PIND, 6>;
+            using PIND7 = registers::rw_bit<PIND, 7>;
+        using DDRD = registers::ddr_register<0x2a, 0b11111111>;
+            using DDRD0 = registers::rw_bit<DDRD, 0>;
+            using DDRD1 = registers::rw_bit<DDRD, 1>;
+            using DDRD2 = registers::rw_bit<DDRD, 2>;
+            using DDRD3 = registers::rw_bit<DDRD, 3>;
+            using DDRD4 = registers::rw_bit<DDRD, 4>;
+            using DDRD5 = registers::rw_bit<DDRD, 5>;
+            using DDRD6 = registers::rw_bit<DDRD, 6>;
+            using DDRD7 = registers::rw_bit<DDRD, 7>;
+        using PORTD = registers::port_register<0x2b, 0b11111111>;
+            using PORTD0 = registers::rw_bit<PORTD, 0>;
+            using PORTD1 = registers::rw_bit<PORTD, 1>;
+            using PORTD2 = registers::rw_bit<PORTD, 2>;
+            using PORTD3 = registers::rw_bit<PORTD, 3>;
+            using PORTD4 = registers::rw_bit<PORTD, 4>;
+            using PORTD5 = registers::rw_bit<PORTD, 5>;
+            using PORTD6 = registers::rw_bit<PORTD, 6>;
+            using PORTD7 = registers::rw_bit<PORTD, 7>;
 
-#define PORTB   _SFR_IO8(0x05)
-constexpr auto PB7 = 0x07;
-constexpr auto PB6 = 0x06;
-constexpr auto PB5 = 0x05;
-constexpr auto PB4 = 0x04;
-constexpr auto PB3 = 0x03;
-constexpr auto PB2 = 0x02;
-constexpr auto PB1 = 0x01;
-constexpr auto PB0 = 0x00;
+        using PINE = registers::pin_register<0x2c, 0b11111111>;
+            using PINE0 = registers::rw_bit<PINE, 0>;
+            using PINE1 = registers::rw_bit<PINE, 1>;
+            using PINE2 = registers::rw_bit<PINE, 2>;
+            using PINE3 = registers::rw_bit<PINE, 3>;
+            using PINE4 = registers::rw_bit<PINE, 4>;
+            using PINE5 = registers::rw_bit<PINE, 5>;
+            using PINE6 = registers::rw_bit<PINE, 6>;
+            using PINE7 = registers::rw_bit<PINE, 7>;
+        using DDRE = registers::ddr_register<0x2d, 0b11111111>;
+            using DDRE0 = registers::rw_bit<DDRE, 0>;
+            using DDRE1 = registers::rw_bit<DDRE, 1>;
+            using DDRE2 = registers::rw_bit<DDRE, 2>;
+            using DDRE3 = registers::rw_bit<DDRE, 3>;
+            using DDRE4 = registers::rw_bit<DDRE, 4>;
+            using DDRE5 = registers::rw_bit<DDRE, 5>;
+            using DDRE6 = registers::rw_bit<DDRE, 6>;
+            using DDRE7 = registers::rw_bit<DDRE, 7>;
+        using PORTE = registers::port_register<0x2e, 0b11111111>;
+            using PORTE0 = registers::rw_bit<PORTE, 0>;
+            using PORTE1 = registers::rw_bit<PORTE, 1>;
+            using PORTE2 = registers::rw_bit<PORTE, 2>;
+            using PORTE3 = registers::rw_bit<PORTE, 3>;
+            using PORTE4 = registers::rw_bit<PORTE, 4>;
+            using PORTE5 = registers::rw_bit<PORTE, 5>;
+            using PORTE6 = registers::rw_bit<PORTE, 6>;
+            using PORTE7 = registers::rw_bit<PORTE, 7>;
 
-#define PINC    _SFR_IO8(0x06)
-constexpr auto PINC7 = 0x07;
-constexpr auto PINC6 = 0x06;
-constexpr auto PINC5 = 0x05;
-constexpr auto PINC4 = 0x04;
-constexpr auto PINC3 = 0x03;
-constexpr auto PINC2 = 0x02;
-constexpr auto PINC1 = 0x01;
-constexpr auto PINC0 = 0x00;
+        using PINF = registers::pin_register<0x2f, 0b11111111>;
+            using PINF0 = registers::rw_bit<PINF, 0>;
+            using PINF1 = registers::rw_bit<PINF, 1>;
+            using PINF2 = registers::rw_bit<PINF, 2>;
+            using PINF3 = registers::rw_bit<PINF, 3>;
+            using PINF4 = registers::rw_bit<PINF, 4>;
+            using PINF5 = registers::rw_bit<PINF, 5>;
+            using PINF6 = registers::rw_bit<PINF, 6>;
+            using PINF7 = registers::rw_bit<PINF, 7>;
+        using DDRF = registers::ddr_register<0x30, 0b11111111>;
+            using DDRF0 = registers::rw_bit<DDRF, 0>;
+            using DDRF1 = registers::rw_bit<DDRF, 1>;
+            using DDRF2 = registers::rw_bit<DDRF, 2>;
+            using DDRF3 = registers::rw_bit<DDRF, 3>;
+            using DDRF4 = registers::rw_bit<DDRF, 4>;
+            using DDRF5 = registers::rw_bit<DDRF, 5>;
+            using DDRF6 = registers::rw_bit<DDRF, 6>;
+            using DDRF7 = registers::rw_bit<DDRF, 7>;
+        using PORTF = registers::port_register<0x31, 0b11111111>;
+            using PORTF0 = registers::rw_bit<PORTF, 0>;
+            using PORTF1 = registers::rw_bit<PORTF, 1>;
+            using PORTF2 = registers::rw_bit<PORTF, 2>;
+            using PORTF3 = registers::rw_bit<PORTF, 3>;
+            using PORTF4 = registers::rw_bit<PORTF, 4>;
+            using PORTF5 = registers::rw_bit<PORTF, 5>;
+            using PORTF6 = registers::rw_bit<PORTF, 6>;
+            using PORTF7 = registers::rw_bit<PORTF, 7>;
 
-#define DDRC    _SFR_IO8(0x07)
-constexpr auto DDC7 = 0x07;
-constexpr auto DDC6 = 0x06;
-constexpr auto DDC5 = 0x05;
-constexpr auto DDC4 = 0x04;
-constexpr auto DDC3 = 0x03;
-constexpr auto DDC2 = 0x02;
-constexpr auto DDC1 = 0x01;
-constexpr auto DDC0 = 0x00;
+        using PING = registers::pin_register<0x32, 0b00111111>;
+            using PING0 = registers::rw_bit<PING, 0>;
+            using PING1 = registers::rw_bit<PING, 1>;
+            using PING2 = registers::rw_bit<PING, 2>;
+            using PING3 = registers::rw_bit<PING, 3>;
+            using PING4 = registers::rw_bit<PING, 4>;
+            using PING5 = registers::rw_bit<PING, 5>;
+        using DDRG = registers::ddr_register<0x33, 0b00111111>;
+            using DDRG0 = registers::rw_bit<DDRG, 0>;
+            using DDRG1 = registers::rw_bit<DDRG, 1>;
+            using DDRG2 = registers::rw_bit<DDRG, 2>;
+            using DDRG3 = registers::rw_bit<DDRG, 3>;
+            using DDRG4 = registers::rw_bit<DDRG, 4>;
+            using DDRG5 = registers::rw_bit<DDRG, 5>;
+        using PORTG = registers::port_register<0x34, 0b00111111>;
+            using PORTG0 = registers::rw_bit<PORTG, 0>;
+            using PORTG1 = registers::rw_bit<PORTG, 1>;
+            using PORTG2 = registers::rw_bit<PORTG, 2>;
+            using PORTG3 = registers::rw_bit<PORTG, 3>;
+            using PORTG4 = registers::rw_bit<PORTG, 4>;
+            using PORTG5 = registers::rw_bit<PORTG, 5>;
 
-#define PORTC   _SFR_IO8(0x08)
-constexpr auto PC7 = 0x07;
-constexpr auto PC6 = 0x06;
-constexpr auto PC5 = 0x05;
-constexpr auto PC4 = 0x04;
-constexpr auto PC3 = 0x03;
-constexpr auto PC2 = 0x02;
-constexpr auto PC1 = 0x01;
-constexpr auto PC0 = 0x00;
 
-#define PIND    _SFR_IO8(0x09)
-constexpr auto PIND7 = 0x07;
-constexpr auto PIND6 = 0x06;
-constexpr auto PIND5 = 0x05;
-constexpr auto PIND4 = 0x04;
-constexpr auto PIND3 = 0x03;
-constexpr auto PIND2 = 0x02;
-constexpr auto PIND1 = 0x01;
-constexpr auto PIND0 = 0x00;
+        using TIFR0     = registers::rw_io_register<0x35, 8, 0b00000111>;
+            using OCF0B = registers::rw_bit<TIFR0, 0x02>;
+            using OCF0A = registers::rw_bit<TIFR0, 0x01>;
+            using TOV0  = registers::rw_bit<TIFR0, 0x00>;
 
-#define DDRD    _SFR_IO8(0x0A)
-constexpr auto DDD7 = 0x07;
-constexpr auto DDD6 = 0x06;
-constexpr auto DDD5 = 0x05;
-constexpr auto DDD4 = 0x04;
-constexpr auto DDD3 = 0x03;
-constexpr auto DDD2 = 0x02;
-constexpr auto DDD1 = 0x01;
-constexpr auto DDD0 = 0x00;
+        using TIFR1     = registers::rw_io_register<0x36, 8, 0b00101111>;
+            using ICF1  = registers::rw_bit<TIFR1, 0x05>;
+            using OCF1C = registers::rw_bit<TIFR1, 0x03>;
+            using OCF1B = registers::rw_bit<TIFR1, 0x02>;
+            using OCF1A = registers::rw_bit<TIFR1, 0x01>;
+            using TOV1  = registers::rw_bit<TIFR1, 0x00>;
 
-#define PORTD   _SFR_IO8(0x0B)
-constexpr auto PD7 = 0x07;
-constexpr auto PD6 = 0x06;
-constexpr auto PD5 = 0x05;
-constexpr auto PD4 = 0x04;
-constexpr auto PD3 = 0x03;
-constexpr auto PD2 = 0x02;
-constexpr auto PD1 = 0x01;
-constexpr auto PD0 = 0x00;
+        using TIFR2     = registers::rw_io_register<0x37, 8, 0b00000111>;
+            using OCF2B = registers::rw_bit<TIFR2, 0x02>;
+            using OCF2A = registers::rw_bit<TIFR2, 0x01>;
+            using TOV2  = registers::rw_bit<TIFR2, 0x00>;
 
-#define PINE    _SFR_IO8(0x0C)
-constexpr auto PINE7 = 0x07;
-constexpr auto PINE6 = 0x06;
-constexpr auto PINE5 = 0x05;
-constexpr auto PINE4 = 0x04;
-constexpr auto PINE3 = 0x03;
-constexpr auto PINE2 = 0x02;
-constexpr auto PINE1 = 0x01;
-constexpr auto PINE0 = 0x00;
+        using TIFR3     = registers::rw_io_register<0x38, 8, 0b00101111>;
+            using ICF3  = registers::rw_bit<TIFR3, 0x05>;
+            using OCF3C = registers::rw_bit<TIFR3, 0x03>;
+            using OCF3B = registers::rw_bit<TIFR3, 0x02>;
+            using OCF3A = registers::rw_bit<TIFR3, 0x01>;
+            using TOV3  = registers::rw_bit<TIFR3, 0x00>;
 
-#define DDRE    _SFR_IO8(0x0D)
-constexpr auto DDE7 = 0x07;
-constexpr auto DDE6 = 0x06;
-constexpr auto DDE5 = 0x05;
-constexpr auto DDE4 = 0x04;
-constexpr auto DDE3 = 0x03;
-constexpr auto DDE2 = 0x02;
-constexpr auto DDE1 = 0x01;
-constexpr auto DDE0 = 0x00;
+        using TIFR4     = registers::rw_io_register<0x39, 8, 0b00101111>;
+            using ICF4  = registers::rw_bit<TIFR4, 0x05>;
+            using OCF4C = registers::rw_bit<TIFR4, 0x03>;
+            using OCF4B = registers::rw_bit<TIFR4, 0x02>;
+            using OCF4A = registers::rw_bit<TIFR4, 0x01>;
+            using TOV4  = registers::rw_bit<TIFR4, 0x00>;
 
-#define PORTE   _SFR_IO8(0x0E)
-constexpr auto PE7 = 0x07;
-constexpr auto PE6 = 0x06;
-constexpr auto PE5 = 0x05;
-constexpr auto PE4 = 0x04;
-constexpr auto PE3 = 0x03;
-constexpr auto PE2 = 0x02;
-constexpr auto PE1 = 0x01;
-constexpr auto PE0 = 0x00;
+        using TIFR5     = registers::rw_io_register<0x3A, 8, 0b00101111>;
+            using ICF5  = registers::rw_bit<TIFR5, 0x05>;
+            using OCF5C = registers::rw_bit<TIFR5, 0x03>;
+            using OCF5B = registers::rw_bit<TIFR5, 0x02>;
+            using OCF5A = registers::rw_bit<TIFR5, 0x01>;
+            using TOV5  = registers::rw_bit<TIFR5, 0x00>;
 
-#define PINF    _SFR_IO8(0x0F)
-constexpr auto PINF7 = 0x07;
-constexpr auto PINF6 = 0x06;
-constexpr auto PINF5 = 0x05;
-constexpr auto PINF4 = 0x04;
-constexpr auto PINF3 = 0x03;
-constexpr auto PINF2 = 0x02;
-constexpr auto PINF1 = 0x01;
-constexpr auto PINF0 = 0x00;
+        using PCIFR     = registers::rw_io_register<0x3B, 8, 0b00000111>;
+        #if defined(__ATmegaxx0__) 
+            using PCIF2 = registers::rw_bit<PCIFR, 0x02>;
+        #endif /* __ATmegaxx0__ */
+            using PCIF1 = registers::rw_bit<PCIFR, 0x01>;
+            using PCIF0 = registers::rw_bit<PCIFR, 0x00>;
 
-#define DDRF    _SFR_IO8(0x10)
-constexpr auto DDF7 = 0x07;
-constexpr auto DDF6 = 0x06;
-constexpr auto DDF5 = 0x05;
-constexpr auto DDF4 = 0x04;
-constexpr auto DDF3 = 0x03;
-constexpr auto DDF2 = 0x02;
-constexpr auto DDF1 = 0x01;
-constexpr auto DDF0 = 0x00;
+        using EIFR      = registers::rw_io_register<0x3C, 8, 0b11111111>;
+            using INTF7 = registers::rw_bit<EIFR, 0x07>;
+            using INTF6 = registers::rw_bit<EIFR, 0x06>;
+            using INTF5 = registers::rw_bit<EIFR, 0x05>;
+            using INTF4 = registers::rw_bit<EIFR, 0x04>;
+            using INTF3 = registers::rw_bit<EIFR, 0x03>;
+            using INTF2 = registers::rw_bit<EIFR, 0x02>;
+            using INTF1 = registers::rw_bit<EIFR, 0x01>;
+            using INTF0 = registers::rw_bit<EIFR, 0x00>;
 
-#define PORTF   _SFR_IO8(0x11)
-constexpr auto PF7 = 0x07;
-constexpr auto PF6 = 0x06;
-constexpr auto PF5 = 0x05;
-constexpr auto PF4 = 0x04;
-constexpr auto PF3 = 0x03;
-constexpr auto PF2 = 0x02;
-constexpr auto PF1 = 0x01;
-constexpr auto PF0 = 0x00;
+        using EIMSK    = registers::rw_io_register<0x3D, 8, 0b11111111>;
+            using INT7 = registers::rw_bit<EIMSK, 0x07>;
+            using INT6 = registers::rw_bit<EIMSK, 0x06>;
+            using INT5 = registers::rw_bit<EIMSK, 0x05>;
+            using INT4 = registers::rw_bit<EIMSK, 0x04>;
+            using INT3 = registers::rw_bit<EIMSK, 0x03>;
+            using INT2 = registers::rw_bit<EIMSK, 0x02>;
+            using INT1 = registers::rw_bit<EIMSK, 0X01>;
+            using INT0 = registers::rw_bit<EIMSK, 0x00>;
 
-#define PING    _SFR_IO8(0x12)
-constexpr auto PING5 = 0x05;
-constexpr auto PING4 = 0x04;
-constexpr auto PING3 = 0x03;
-constexpr auto PING2 = 0x02;
-constexpr auto PING1 = 0x01;
-constexpr auto PING0 = 0x00;
+        using GPIOR0  = registers::rw_io_register<0x3E, 8, 0b11111111>;
 
-#define DDRG    _SFR_IO8(0x13)
-constexpr auto DDG5 = 0x05;
-constexpr auto DDG4 = 0x04;
-constexpr auto DDG3 = 0x03;
-constexpr auto DDG2 = 0x02;
-constexpr auto DDG1 = 0x01;
-constexpr auto DDG0 = 0x00;
+        using EECR      = registers::rw_io_register<0x3F, 8, 0b00111111>;
+            using EEPM1 = registers::rw_bit<EECR, 0x05>;
+            using EEPM0 = registers::rw_bit<EECR, 0x04>;
+            using EERIE = registers::rw_bit<EECR, 0x03>;
+            using EEMPE = registers::rw_bit<EECR, 0x02>;
+            using EEPE  = registers::rw_bit<EECR, 0x01>;
+            using EERE  = registers::rw_bit<EECR, 0x00>;
 
-#define PORTG   _SFR_IO8(0x14)
-constexpr auto PG5 = 0x05;
-constexpr auto PG4 = 0x04;
-constexpr auto PG3 = 0x03;
-constexpr auto PG2 = 0x02;
-constexpr auto PG1 = 0x01;
-constexpr auto PG0 = 0x00;
+        using EEDR    = registers::rw_io_register<0X40, 8, 0b11111111>;
 
-#define TIFR0   _SFR_IO8(0x15)
-constexpr auto OCF0B = 0x02;
-constexpr auto OCF0A = 0x01;
-constexpr auto TOV0 = 0x00;
+        /* Combine EEARL and EEARH */
+        using EEAR    = registers::rw_io_register<0x41, 16, 0b11111111>;
+        
+        using EEARL   = registers::rw_io_register<0x41, 8, 0b11111111>;
+        using EEARH   = registers::rw_io_register<0X42, 8, 0b00001111>;
 
-#define TIFR1   _SFR_IO8(0x16)
-constexpr auto ICF1 = 0x05;
-constexpr auto OCF1C = 0x03;
-constexpr auto OCF1B = 0x02;
-constexpr auto OCF1A = 0x01;
-constexpr auto TOV1 = 0x00;
-
-#define TIFR2   _SFR_IO8(0x17)
-constexpr auto OCF2B = 0x02;
-constexpr auto OCF2A = 0x01;
-constexpr auto TOV2 = 0x00;
-
-#define TIFR3   _SFR_IO8(0x18)
-constexpr auto ICF3 = 0x05;
-constexpr auto OCF3C = 0x03;
-constexpr auto OCF3B = 0x02;
-constexpr auto OCF3A = 0x01;
-constexpr auto TOV3 = 0x00;
-
-#define TIFR4   _SFR_IO8(0x19)
-constexpr auto ICF4 = 0x05;
-constexpr auto OCF4C = 0x03;
-constexpr auto OCF4B = 0x02;
-constexpr auto OCF4A = 0x01;
-constexpr auto TOV4 = 0x00;
-
-#define TIFR5   _SFR_IO8(0x1A)
-constexpr auto ICF5 = 0x05;
-constexpr auto OCF5C = 0x03;
-constexpr auto OCF5B = 0x02;
-constexpr auto OCF5A = 0x01;
-constexpr auto TOV5 = 0x00;
-
-#define PCIFR   _SFR_IO8(0x1B)
-#if defined(__ATmegaxx0__) 
-# define PCIF2  2
-#endif /* __ATmegaxx0__ */
-constexpr auto PCIF1 = 0x01;
-constexpr auto PCIF0 = 0x00;
-
-#define EIFR   _SFR_IO8(0x1C)
-constexpr auto INTF7 = 0x07;
-constexpr auto INTF6 = 0x06;
-constexpr auto INTF5 = 0x05;
-constexpr auto INTF4 = 0x04;
-constexpr auto INTF3 = 0x03;
-constexpr auto INTF2 = 0x02;
-constexpr auto INTF1 = 0x01;
-constexpr auto INTF0 = 0x00;
-
-#define EIMSK   _SFR_IO8(0x1D)
-constexpr auto INT7 = 0x07;
-constexpr auto INT6 = 0x06;
-constexpr auto INT5 = 0x05;
-constexpr auto INT4 = 0x04;
-constexpr auto INT3 = 0x03;
-constexpr auto INT2 = 0x02;
-constexpr auto INT1 = 1 ;
-constexpr auto INT0 = 0x00;
-
-#define GPIOR0  _SFR_IO8(0x1E)
-
-#define EECR    _SFR_IO8(0x1F)
-constexpr auto EEPM1 = 0x05;
-constexpr auto EEPM0 = 0x04;
-constexpr auto EERIE = 0x03;
-constexpr auto EEMPE = 0x02;
-constexpr auto EEPE = 0x01;
-constexpr auto EERE = 0x00;
-
-#define EEDR    _SFR_IO8(0X20)
-
-/* Combine EEARL and EEARH */
-#define EEAR    _SFR_IO16(0x21)
-
-#define EEARL   _SFR_IO8(0x21)
-#define EEARH   _SFR_IO8(0X22)
-
-/* 6-char sequence denoting where to find the EEPROM registers in memory space.
-   Adresses denoted in hex syntax with uppercase letters. Used by the EEPROM
-   subroutines.
-   First two letters:  EECR address.
-   Second two letters: EEDR address.
-   Last two letters:   EEAR address.  */
+        /* 6-char sequence denoting where to find the EEPROM registers in memory space.
+           Adresses denoted in hex syntax with uppercase letters. Used by the EEPROM
+           subroutines.
+           First two letters:  EECR address.
+           Second two letters: EEDR address.
+           Last two letters:   EEAR address.  */
 #define __EEPROM_REG_LOCATIONS__ 1F2021
 
-#define GTCCR   _SFR_IO8(0x23)
-constexpr auto TSM = 0x07;
-constexpr auto PSRASY = 0x01;
-constexpr auto PSRSYNC = 0x00;
+        using GTCCR       = registers::rw_io_register<0x43, 8, 0b10000011>;
+            using TSM     = registers::rw_bit<GTCCR, 0x07>;
+            using PSRASY  = registers::rw_bit<GTCCR, 0x01>;
+            using PSRSYNC = registers::rw_bit<GTCCR, 0x00>;
 
-#define TCCR0A  _SFR_IO8(0x24)
-constexpr auto COM0A1 = 0x07;
-constexpr auto COM0A0 = 0x06;
-constexpr auto COM0B1 = 0x05;
-constexpr auto COM0B0 = 0x04;
-constexpr auto WGM01 = 0x01;
-constexpr auto WGM00 = 0x00;
+        using TCCR0A     = registers::rw_io_register<0x44, 8, 0b11110011>;
+            using COM0A1 = registers::rw_bit<TCCR0A, 0x07>;
+            using COM0A0 = registers::rw_bit<TCCR0A, 0x06>;
+            using COM0B1 = registers::rw_bit<TCCR0A, 0x05>;
+            using COM0B0 = registers::rw_bit<TCCR0A, 0x04>;
+            using WGM01  = registers::rw_bit<TCCR0A, 0x01>;
+            using WGM00  = registers::rw_bit<TCCR0A, 0x00>;
 
-#define TCCR0B  _SFR_IO8(0x25)
-constexpr auto FOC0A = 0x07;
-constexpr auto FOC0B = 0x06;
-constexpr auto WGM02 = 0x03;
-constexpr auto CS02 = 0x02;
-constexpr auto CS01 = 0x01;
-constexpr auto CS00 = 0x00;
+        using TCCR0B    = registers::rw_io_register<0x45, 8, 0b11001111>;
+            using FOC0A = registers::rw_bit<TCCR0B, 0x07>;
+            using FOC0B = registers::rw_bit<TCCR0B, 0x06>;
+            using WGM02 = registers::rw_bit<TCCR0B, 0x03>;
+            using CS02  = registers::rw_bit<TCCR0B, 0x02>;
+            using CS01  = registers::rw_bit<TCCR0B, 0x01>;
+            using CS00  = registers::rw_bit<TCCR0B, 0x00>;
 
-#define TCNT0   _SFR_IO8(0X26)
+        using TCNT0   = registers::rw_io_register<0X46, 8, 0b11111111>;
+        using OCR0A   = registers::rw_io_register<0X47, 8, 0b11111111>;
+        using OCR0B   = registers::rw_io_register<0X48, 8, 0b11111111>;
 
-#define OCR0A   _SFR_IO8(0X27)
+        /* Reserved [0x49] */
 
-#define OCR0B   _SFR_IO8(0X28)
+        using GPIOR1  = registers::rw_io_register<0x4A, 8, 0b11111111>;
+        using GPIOR2  = registers::rw_io_register<0x4B, 8, 0b11111111>;
 
-/* Reserved [0x29] */
+        using SPCR     = registers::rw_io_register<0x4C, 8, 0b11111111>;
+            using SPIE = registers::rw_bit<SPCR, 0x07>;
+            using SPE  = registers::rw_bit<SPCR, 0x06>;
+            using DORD = registers::rw_bit<SPCR, 0x05>;
+            using MSTR = registers::rw_bit<SPCR, 0x04>;
+            using CPOL = registers::rw_bit<SPCR, 0x03>;
+            using CPHA = registers::rw_bit<SPCR, 0x02>;
+            using SPR1 = registers::rw_bit<SPCR, 0x01>;
+            using SPR0 = registers::rw_bit<SPCR, 0x00>;
 
-#define GPIOR1  _SFR_IO8(0x2A)
+        using SPSR      = registers::rw_io_register<0x4D, 8, 0b11000001>;
+            using SPIF  = registers::ro_bit<SPSR, 0x07>;
+            using WCOL  = registers::ro_bit<SPSR, 0x06>;
+            using SPI2X = registers::rw_bit<SPSR, 0x00>;
 
-#define GPIOR2  _SFR_IO8(0x2B)
+        using SPDR    = registers::rw_io_register<0X4E, 8, 0b11111111>;
 
-#define SPCR    _SFR_IO8(0x2C)
-constexpr auto SPIE = 0x07;
-constexpr auto SPE = 0x06;
-constexpr auto DORD = 0x05;
-constexpr auto MSTR = 0x04;
-constexpr auto CPOL = 0x03;
-constexpr auto CPHA = 0x02;
-constexpr auto SPR1 = 0x01;
-constexpr auto SPR0 = 0x00;
+        /* Reserved [0x4F] */
 
-#define SPSR    _SFR_IO8(0x2D)
-constexpr auto SPIF = 0x07;
-constexpr auto WCOL = 0x06;
-constexpr auto SPI2X = 0x00;
+        using ACSR      = registers::rw_io_register<0x50, 8, 0b11111111>;
+            using ACD   = registers::rw_bit<ACSR, 0x07>;
+            using ACBG  = registers::rw_bit<ACSR, 0x06>;
+            using ACO   = registers::ro_bit<ACSR, 0x05>;
+            using ACI   = registers::rw_bit<ACSR, 0x04>;
+            using ACIE  = registers::rw_bit<ACSR, 0x03>;
+            using ACIC  = registers::rw_bit<ACSR, 0x02>;
+            using ACIS1 = registers::rw_bit<ACSR, 0x01>;
+            using ACIS0 = registers::rw_bit<ACSR, 0x00>;
 
-#define SPDR    _SFR_IO8(0X2E)
+        using MONDR   = registers::rw_io_register<0x51, 8, 0b00000000>;
+        using OCDR      = registers::rw_io_register<0x51, 8, 0b11111111>;
+            using IDRD  = registers::rw_bit<OCDR, 0x07>;
+            using OCDR7 = registers::rw_bit<OCDR, 0x07>;
+            using OCDR6 = registers::rw_bit<OCDR, 0x06>;
+            using OCDR5 = registers::rw_bit<OCDR, 0x05>;
+            using OCDR4 = registers::rw_bit<OCDR, 0x04>;
+            using OCDR3 = registers::rw_bit<OCDR, 0x03>;
+            using OCDR2 = registers::rw_bit<OCDR, 0x02>;
+            using OCDR1 = registers::rw_bit<OCDR, 0x01>;
+            using OCDR0 = registers::rw_bit<OCDR, 0x00>;
 
-/* Reserved [0x2F] */
+        /* Reserved [0x52] */
 
-#define ACSR    _SFR_IO8(0x30)
-constexpr auto ACD = 0x07;
-constexpr auto ACBG = 0x06;
-constexpr auto ACO = 0x05;
-constexpr auto ACI = 0x04;
-constexpr auto ACIE = 0x03;
-constexpr auto ACIC = 0x02;
-constexpr auto ACIS1 = 0x01;
-constexpr auto ACIS0 = 0x00;
+        using SMCR    = registers::rw_io_register<0x53, 8, 0b00001111>;
+            using SM2 = registers::rw_bit<SMCR, 0x03>;
+            using SM1 = registers::rw_bit<SMCR, 0x02>;
+            using SM0 = registers::rw_bit<SMCR, 0x01>;
+            using SE  = registers::rw_bit<SMCR, 0x00>;
 
-#define MONDR   _SFR_IO8(0x31)
-#define OCDR    _SFR_IO8(0x31)
-constexpr auto IDRD = 0x07;
-constexpr auto OCDR7 = 0x07;
-constexpr auto OCDR6 = 0x06;
-constexpr auto OCDR5 = 0x05;
-constexpr auto OCDR4 = 0x04;
-constexpr auto OCDR3 = 0x03;
-constexpr auto OCDR2 = 0x02;
-constexpr auto OCDR1 = 0x01;
-constexpr auto OCDR0 = 0x00;
+        using MCUSR     = registers::rw_io_register<0x54, 8, 0b00000000>;
+            using JTRF  = registers::rw_bit<MCUSR, 0x04>;
+            using WDRF  = registers::rw_bit<MCUSR, 0x03>;
+            using BORF  = registers::rw_bit<MCUSR, 0x02>;
+            using EXTRF = registers::rw_bit<MCUSR, 0x01>;
+            using PORF  = registers::rw_bit<MCUSR, 0x00>;
 
-/* Reserved [0x32] */
+        using MCUCR     = registers::rw_io_register<0X55, 8, 0b10010011>;
+            using JTD   = registers::rw_bit<MCUCR, 0x07>;
+            using PUD   = registers::rw_bit<MCUCR, 0x04>;
+            using IVSEL = registers::rw_bit<MCUCR, 0x01>;
+            using IVCE  = registers::rw_bit<MCUCR, 0x00>;
 
-#define SMCR    _SFR_IO8(0x33)
-constexpr auto SM2 = 0x03;
-constexpr auto SM1 = 0x02;
-constexpr auto SM0 = 0x01;
-constexpr auto SE = 0x00;
+        /* Reserved [0x56] */
 
-#define MCUSR   _SFR_IO8(0x34)
-constexpr auto JTRF = 0x04;
-constexpr auto WDRF = 0x03;
-constexpr auto BORF = 0x02;
-constexpr auto EXTRF = 0x01;
-constexpr auto PORF = 0x00;
+        using SPMCSR     = registers::rw_io_register<0x57, 8, 0b11111111>;
+            using SPMIE  = registers::rw_bit<SPMCSR, 0x07>;
+            using RWWSB  = registers::rw_bit<SPMCSR, 0x06>;
+            using SIGRD  = registers::rw_bit<SPMCSR, 0x05>;
+            using RWWSRE = registers::rw_bit<SPMCSR, 0x04>;
+            using BLBSET = registers::rw_bit<SPMCSR, 0x03>;
+            using PGWRT  = registers::rw_bit<SPMCSR, 0x02>;
+            using PGERS  = registers::rw_bit<SPMCSR, 0x01>;
+            using SPMEN  = registers::rw_bit<SPMCSR, 0x00>;
 
-#define MCUCR   _SFR_IO8(0X35)
-constexpr auto JTD = 0x07;
-constexpr auto PUD = 0x04;
-constexpr auto IVSEL = 0x01;
-constexpr auto IVCE = 0x00;
+        /* Reserved [0x58..0x5A] */
 
-/* Reserved [0x36] */
+        using RAMPZ      = registers::rw_io_register<0X5B, 8, 0b00000011>;
+            using RAMPZ1 = registers::rw_bit<RAMPZ, 0x01>;
+            using RAMPZ0 = registers::rw_bit<RAMPZ, 0x00>;
 
-#define SPMCSR  _SFR_IO8(0x37)
-constexpr auto SPMIE = 0x07;
-constexpr auto RWWSB = 0x06;
-constexpr auto SIGRD = 0x05;
-constexpr auto RWWSRE = 0x04;
-constexpr auto BLBSET = 0x03;
-constexpr auto PGWRT = 0x02;
-constexpr auto PGERS = 0x01;
-constexpr auto SPMEN = 0x00;
+        using EIND      = registers::rw_io_register<0X5C, 8, 0b00000001>;
+            using EIND0 = registers::rw_bit<EIND, 0x00>;
 
-/* Reserved [0x38..0x3A] */
+        /* SP [0x5D..0x5E] */
+        /* SREG [0x5F] */
+    };
 
-#define RAMPZ   _SFR_IO8(0X3B)
-constexpr auto RAMPZ0 = 0x00;
-
-#define EIND    _SFR_IO8(0X3C)
-constexpr auto EIND0 = 0x00;
-
-/* SP [0x3D..0x3E] */
-/* SREG [0x3F] */
 
 #define WDTCSR  _SFR_MEM8(0x60)
 constexpr auto WDIF = 0x07;
@@ -1690,6 +1684,6 @@ constexpr auto PCINT0_vect_num = 0x09;
 
 #endif  /* !defined(__AVR_LIBC_DEPRECATED_ENABLE__) */
 
-} /* end of namespace vAVR */
+}}} /* end of namespace vAVR */
 
 #endif /* _AVR_IOMXX0_1_H_ */

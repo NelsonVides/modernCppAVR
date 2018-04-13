@@ -71,6 +71,10 @@ less than 256 bytes of possible RAM locations (128 Bytes of SRAM
 and no option for external RAM), thus SPH is officially "reserved"
 for them.
 */
+
+    struct commonChip {
+        ~commonChip() = delete;
+
 #if __AVR_ARCH__ >= 100
 #  ifndef SPL
 #    define SPL _SFR_MEM8(0x3D)
@@ -327,7 +331,7 @@ and families.
 #  define __AVR_HAVE_MUL__ 1
 # endif
 #endif
-
+    };
 
 }}} /* end of all three nested namespaces vAVR::internal::common */
 

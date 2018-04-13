@@ -96,7 +96,8 @@
 #ifndef _AVR_IO_H_
 #define _AVR_IO_H_
 
-#include <avr/sfr_defs.h>
+#include "sfr_defs.h"
+#include "common.h"
 
 #if defined (__AVR_AT94K__)
 #  include <avr/ioat94k.h>
@@ -625,8 +626,6 @@
 #endif
 
 #include <avr/portpins.h>
-
-#include <avr/common.h>
 
 #include <avr/version.h>
 
