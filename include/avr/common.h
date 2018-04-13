@@ -35,6 +35,11 @@
 #define _AVR_COMMON_H
 
 #include <avr/sfr_defs.h>
+#include <avr/registers.h>
+
+namespace vAVR {
+namespace internal {
+namespace common {
 
 /* 
 This purpose of this header is to define registers that have not been 
@@ -77,58 +82,48 @@ for them.
 #    define SP _SFR_MEM16(0x3D)
 #  endif
 #elif __AVR_ARCH__ != 1 
-#  ifndef SPL
-#    define SPL _SFR_IO8(0x3D)
-#  endif
+    using SPL = registers::rw_io_register<0x5D, 8, 0b11111111>;
 #  if XRAMEND < 0x100 && !defined(__COMPILING_AVR_LIBC__)
-#    ifndef SP
-#      define SP  _SFR_IO8(0x3D)
-#    endif
+    using SP = registers::rw_io_register<0x5D, 8, 0b11111111>;
 #  else
-#    ifndef SP
-#      define SP  _SFR_IO16(0x3D)
-#    endif
-#    ifndef SPH
-#      define SPH _SFR_IO8(0x3E)
-#    endif
+    using SP = registers::rw_io_register<0x5D, 16, 0b11111111>;
+    using SPH = registers::rw_io_register<0x5E, 8, 0b00000111>;
 #  endif /* XRAMEND < 0x100 && !defined(__COMPILING_AVR_LIBC__) */
 #endif /* __AVR_ARCH__ != 1 */
 
 
 /* Status Register */
-#ifndef SREG
-#  if __AVR_ARCH__ >= 100
+#if __AVR_ARCH__ >= 100
 #    define SREG _SFR_MEM8(0x3F)
-#  else
-#    define SREG _SFR_IO8(0x3F)
-#  endif
+#else
+    using SREG = registers::rw_io_register<0x5F, 8, 0b11111111>;
 #endif
 
 
 /* SREG bit definitions */
 #ifndef SREG_C
-#  define SREG_C  (0)
+    using SREG_C = registers::rw_bit<SREG, 0>;
 #endif
 #ifndef SREG_Z
-#  define SREG_Z  (1)
+    using SREG_Z = registers::rw_bit<SREG, 1>;
 #endif
 #ifndef SREG_N
-#  define SREG_N  (2)
+    using SREG_N = registers::rw_bit<SREG, 2>;
 #endif
 #ifndef SREG_V
-#  define SREG_V  (3)
+    using SREG_V = registers::rw_bit<SREG, 3>;
 #endif
 #ifndef SREG_S
-#  define SREG_S  (4)
+    using SREG_S = registers::rw_bit<SREG, 4>;
 #endif
 #ifndef SREG_H
-#  define SREG_H  (5)
+    using SREG_H = registers::rw_bit<SREG, 5>;
 #endif
 #ifndef SREG_T
-#  define SREG_T  (6)
+    using SREG_T = registers::rw_bit<SREG, 6>;
 #endif
 #ifndef SREG_I
-#  define SREG_I  (7)
+    using SREG_I = registers::rw_bit<SREG, 7>;
 #endif
 
 
@@ -194,7 +189,8 @@ keep the EEPROM-related definitions here.
 #    if     __AVR_ARCH__ >= 100
 #      define RAMPZ	_SFR_MEM8(0x3B)
 #    else
-#      define RAMPZ	_SFR_IO8(0x3B)
+//#      define RAMPZ	_SFR_IO8(0x3B)
+    using RAMPZ = registers::rw_io_register<0x5B, 8, 0b11111111>;
 #    endif
 #  endif
 #endif
@@ -331,5 +327,8 @@ and families.
 #  define __AVR_HAVE_MUL__ 1
 # endif
 #endif
+
+
+}}} /* end of all three nested namespaces vAVR::internal::common */
 
 #endif /* _AVR_COMMON_H */

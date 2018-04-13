@@ -80,8 +80,10 @@ namespace registers {
 
     /**
      * * @brief A safe wrapper for AVR <b>Special Function Registers</b>
-     * * This class provides a safe and zero-cost abstraction for the Special Purpose Registers found in AVR microcontrollers. All
-     * * accesses to a register as well as its bits are bound checked, and violations of these bounds will cause compilation to fail.
+     * * This class provides a safe and zero-cost abstraction for 
+     * * the Special Purpose Registers found in AVR microcontrollers. 
+     * * All accesses to a register as well as its bits are bound checked, 
+     * * and violations of these bounds will cause compilation to fail.
      * * @tparam Address The register's address in memory
      * * @tparam Base The address base of the register
      * * @tparam Bits The register's size in Bits
@@ -180,11 +182,6 @@ namespace registers {
         stl::int_types::uint_for_size_t<8> Bits, 
         stl::int_types::uint_for_size_t<Bits> ValidBits>
     class ro_special_function_register : public special_function_register<Address, Base, Bits, ValidBits> {
-        static_assert(stl::in_range(special_function_register<Address, 0x20, Bits, ValidBits>::address,
-                                    0x20,
-                                    0x5f),
-                "Address is not in I/O register range");
-
     protected:
         template<decltype(ValidBits) BitIndex>
         using bit = ro_bit<ro_special_function_register, BitIndex>;
