@@ -37,6 +37,9 @@
 
 #include <avr/iomxx0_1.h>
 
+#define __HAS_EEPROM_MEMORY__
+#define __HAS_BOOTLOADER_SUPPORT__
+
 namespace vAVR {
     namespace internal {
         namespace controllers {
