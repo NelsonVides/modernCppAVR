@@ -141,7 +141,7 @@ namespace registers {
     class rw_special_function_register : public special_function_register<Address, Bits, ValidBits> {
     protected:
         template<decltype(ValidBits) BitIndex>
-            using bit = rw_bit<rw_special_function_register, BitIndex>;
+        using bit = rw_bit<rw_special_function_register, BitIndex>;
 
         using special_function_register<Address, Bits, ValidBits>::reg;
         using typename special_function_register<Address, Bits, ValidBits>::value_type;
@@ -261,6 +261,42 @@ namespace registers {
         template<decltype(ValidBits) PortNumber>
         using port = typename rw_io_register<Address, 8, ValidBits>::template bit<PortNumber>;
     };
+
+
+
+
+
+
+
+    /**
+     * * @brief A safe register wrapper to access the extended I/O registers of an AVR microcontroller
+     * * This class provides access to the extended I/O register of an AVR microcontroller.
+     * * @tparam Address The register's address in memory
+     * * @tparam Bits The size of register in bits
+     * * @tparam ValidBits The available bits in the register
+     * * @since 1.0.0
+     * */
+    template<ptrdiff_t Address,
+        stl::int_types::uint_for_size_t<8> Bits,
+        stl::int_types::uint_for_size_t<Bits> ValidBits>
+    struct rw_extended_io_register : rw_special_function_register<Address, Bits, ValidBits> {};
+
+    /**
+     * * @brief A safe register wrapper to access the I/O registers of an AVR microcontroller
+     * * This class provides access to the I/O register of an AVR microcontroller.
+     * * @tparam Address The register's address in memory
+     * * @tparam Bits The size of register in bits
+     * * @tparam ValidBits The available bits in the register
+     * * @since 1.0.0
+     * */
+    template<ptrdiff_t Address,
+        stl::int_types::uint_for_size_t<8> Bits,
+        stl::int_types::uint_for_size_t<Bits> ValidBits>
+    struct ro_extended_io_register : ro_special_function_register<Address, Bits, ValidBits> {};
+
+
+
+
 }}}
 
 #endif

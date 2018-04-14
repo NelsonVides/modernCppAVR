@@ -75,75 +75,75 @@ for them.
     struct commonChip {
         ~commonChip() = delete;
 
-#if __AVR_ARCH__ >= 100
-#  ifndef SPL
-#    define SPL _SFR_MEM8(0x3D)
-#  endif
-#  ifndef SPH
-#    define SPH _SFR_MEM8(0x3E)
-#  endif
-#  ifndef SP
-#    define SP _SFR_MEM16(0x3D)
-#  endif
-#elif __AVR_ARCH__ != 1 
+//#if __AVR_ARCH__ >= 100
+//#  ifndef SPL
+//#    define SPL _SFR_MEM8(0x3D)
+//#  endif
+//#  ifndef SPH
+//#    define SPH _SFR_MEM8(0x3E)
+//#  endif
+//#  ifndef SP
+//#    define SP _SFR_MEM16(0x3D)
+//#  endif
+//#elif __AVR_ARCH__ != 1 
     using SPL = registers::rw_io_register<0x5D, 8, 0b11111111>;
-#  if XRAMEND < 0x100 && !defined(__COMPILING_AVR_LIBC__)
-    using SP = registers::rw_io_register<0x5D, 8, 0b11111111>;
-#  else
-    using SP = registers::rw_io_register<0x5D, 16, 0b11111111>;
+//#  if XRAMEND < 0x100 && !defined(__COMPILING_AVR_LIBC__)
+//    using SP = registers::rw_io_register<0x5D, 8, 0b11111111>;
+//#  else
+    using SP = registers::rw_io_register<0x5D, 16, 0b1111111111111111>;
     using SPH = registers::rw_io_register<0x5E, 8, 0b00000111>;
-#  endif /* XRAMEND < 0x100 && !defined(__COMPILING_AVR_LIBC__) */
-#endif /* __AVR_ARCH__ != 1 */
+//#  endif /* XRAMEND < 0x100 && !defined(__COMPILING_AVR_LIBC__) */
+//#endif /* __AVR_ARCH__ != 1 */
 
 
 /* Status Register */
-#if __AVR_ARCH__ >= 100
-#    define SREG _SFR_MEM8(0x3F)
-#else
+//#if __AVR_ARCH__ >= 100
+//#    define SREG _SFR_MEM8(0x3F)
+//#else
     using SREG = registers::rw_io_register<0x5F, 8, 0b11111111>;
-#endif
+//#endif
 
 
 /* SREG bit definitions */
-#ifndef SREG_C
+//#ifndef SREG_C
     using SREG_C = registers::rw_bit<SREG, 0>;
-#endif
-#ifndef SREG_Z
+//#endif
+//#ifndef SREG_Z
     using SREG_Z = registers::rw_bit<SREG, 1>;
-#endif
-#ifndef SREG_N
+//#endif
+//#ifndef SREG_N
     using SREG_N = registers::rw_bit<SREG, 2>;
-#endif
-#ifndef SREG_V
+//#endif
+//#ifndef SREG_V
     using SREG_V = registers::rw_bit<SREG, 3>;
-#endif
-#ifndef SREG_S
+//#endif
+//#ifndef SREG_S
     using SREG_S = registers::rw_bit<SREG, 4>;
-#endif
-#ifndef SREG_H
+//#endif
+//#ifndef SREG_H
     using SREG_H = registers::rw_bit<SREG, 5>;
-#endif
-#ifndef SREG_T
+//#endif
+//#ifndef SREG_T
     using SREG_T = registers::rw_bit<SREG, 6>;
-#endif
-#ifndef SREG_I
+//#endif
+//#ifndef SREG_I
     using SREG_I = registers::rw_bit<SREG, 7>;
-#endif
+//#endif
 
 
 #if defined(__COMPILING_AVR_LIBC__)
 
 /* AVR 6 Architecture */
-#  if __AVR_ARCH__ == 6
-#    ifndef EIND
-#      define EIND  _SFR_IO8(0X3C)
-#    endif
+//#  if __AVR_ARCH__ == 6
+//#    ifndef EIND
+//#      define EIND  _SFR_IO8(0X3C)
+//#    endif
 /* XMEGA Architectures */
-#  elif __AVR_ARCH__ >= 100
-#    ifndef EIND
-#      define EIND  _SFR_MEM8(0x3C)
-#    endif
-#  endif
+//#  elif __AVR_ARCH__ >= 100
+//#    ifndef EIND
+//#      define EIND  _SFR_MEM8(0x3C)
+//#    endif
+//#  endif
 
 /*
 Only few devices come without EEPROM.  In order to assemble the
@@ -152,52 +152,52 @@ keep the EEPROM-related definitions here.
 */
 
 /* EEPROM Control Register */
-#  ifndef EECR
-#    define EECR   _SFR_IO8(0x1C)
-#  endif
+//#  ifndef EECR
+//#    define EECR   _SFR_IO8(0x1C)
+//#  endif
 
 /* EEPROM Data Register */
-#  ifndef EEDR
-#    define EEDR   _SFR_IO8(0x1D)
-#  endif
+//#  ifndef EEDR
+//#    define EEDR   _SFR_IO8(0x1D)
+//#  endif
 
 /* EEPROM Address Register */
-#  ifndef EEAR
-#    define EEAR   _SFR_IO16(0x1E)
-#  endif
-#  ifndef EEARL
-#    define EEARL  _SFR_IO8(0x1E)
-#  endif
-#  ifndef EEARH
-#    define EEARH  _SFR_IO8(0x1F)
-#  endif
+//#  ifndef EEAR
+//#    define EEAR   _SFR_IO16(0x1E)
+//#  endif
+//#  ifndef EEARL
+//#    define EEARL  _SFR_IO8(0x1E)
+//#  endif
+//#  ifndef EEARH
+//#    define EEARH  _SFR_IO8(0x1F)
+//#  endif
 
 /* EEPROM Control Register bits */
-#  ifndef EERE
-#    define EERE   (0)
-#  endif
-#  ifndef EEWE
-#    define EEWE   (1)
-#  endif
-#  ifndef EEMWE
-#    define EEMWE  (2)
-#  endif
-#  ifndef EERIE
-#    define EERIE  (3)
-#  endif
+//#  ifndef EERE
+//#    define EERE   (0)
+//#  endif
+//#  ifndef EEWE
+//#    define EEWE   (1)
+//#  endif
+//#  ifndef EEMWE
+//#    define EEMWE  (2)
+//#  endif
+//#  ifndef EERIE
+//#    define EERIE  (3)
+//#  endif
 
 
 /* RAM Page Z Select Register	*/
-#ifndef RAMPZ
-#  if     defined(__AVR_HAVE_RAMPZ__) && __AVR_HAVE_RAMPZ__
-#    if     __AVR_ARCH__ >= 100
-#      define RAMPZ	_SFR_MEM8(0x3B)
-#    else
+//#ifndef RAMPZ
+//#  if     defined(__AVR_HAVE_RAMPZ__) && __AVR_HAVE_RAMPZ__
+//#    if     __AVR_ARCH__ >= 100
+//#      define RAMPZ	_SFR_MEM8(0x3B)
+//#    else
 //#      define RAMPZ	_SFR_IO8(0x3B)
     using RAMPZ = registers::rw_io_register<0x5B, 8, 0b11111111>;
-#    endif
-#  endif
-#endif
+//#    endif
+//#  endif
+//#endif
 
 #endif /* __COMPILING_AVR_LIBC__ */
 
