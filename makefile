@@ -10,19 +10,23 @@
 CC = avr-g++
 CPPFLAGS = -Wall -Wextra -Werror -Woverflow -std=c++14 -fno-exceptions -Wno-int-to-pointer-cast
 AVRFLAGS = -mmcu=atmega2560
-INCLUDES = -I ./include mega328p.h
+INCLUDES = -I ./include
 SOURCES = main.cpp
 OUTDIR = bin
 OBJ_DIR := $(SOURCES:%.cpp=bin/%)
 
-debug: CPPFLAGS += -g
-release: CPPFLAGS += -O2
+debug: CPPFLAGS += -g -o debug.out
+standard: CPPFLAGS += -Os -o standard.out
+release: CPPFLAGS += -O2 -o release.out
+sourcecode: CPPFLAGS += -E -o sourcecode.out
 
 all :
 	$(CC) $(SOURCES) $(CPPFLAGS) $(AVRFLAGS) $(INCLUDES) 
 
 debug: all
+standard: all
 release: all
+sourcecode: all
 
 clean:
 	rm -f $(OUTDIR)/% Makefile.bak

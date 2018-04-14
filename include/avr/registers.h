@@ -85,20 +85,14 @@ namespace registers {
      * * All accesses to a register as well as its bits are bound checked, 
      * * and violations of these bounds will cause compilation to fail.
      * * @tparam Address The register's address in memory
-     * * @tparam Base The address base of the register
      * * @tparam Bits The register's size in Bits
      * * @tparam ValidBits The available bits in the register
-     * * @tparam EffectiveAddress The actual address of the register in memory space
      * * @since 1.0.0
      * */
-    template<ptrdiff_t Address, 
-        ptrdiff_t Base, 
-        stl::int_types::uint_for_size_t<8> Bits, 
-        stl::int_types::uint_for_size_t<Bits> ValidBits, 
-        ptrdiff_t EffectiveAddress = Address>
+    template<ptrdiff_t Address,
+        stl::int_types::uint_for_size_t<8> Bits,
+        stl::int_types::uint_for_size_t<Bits> ValidBits>
     class special_function_register {
-        static_assert(stl::in_range(EffectiveAddress, 0x20, 0xff),
-                "Address is not in Special Function Register range [0x20, 0xff]");
 
         special_function_register() = delete;
         special_function_register(const special_function_register&) = delete;
@@ -117,11 +111,11 @@ namespace registers {
             friend struct ro_bit;
 
     protected:
-        static auto constexpr address = EffectiveAddress;
+        static auto constexpr address = Address;
         static auto constexpr bits = Bits;
         static auto constexpr validBits = ValidBits;
         __attribute__((always_inline)) static inline decltype(auto) constexpr reg() {
-            return (*reinterpret_cast<value_type volatile *>(EffectiveAddress));
+            return (*reinterpret_cast<value_type volatile *>(Address));
         }
 
     public:
@@ -137,22 +131,20 @@ namespace registers {
      * * accesses to a register as well as its bits are bound checked, and violations of these bounds will cause compilation to
      * * fail.
      * * @tparam Address The register's address in memory
-     * * @tparam Base The address base of the register
      * * @tparam Bits The register's size in Bits
      * * @tparam ValidBits The available bits in the register
      * * @since 1.0.0
      * */
     template<ptrdiff_t Address, 
-        ptrdiff_t Base, 
         stl::int_types::uint_for_size_t<8> Bits, 
         stl::int_types::uint_for_size_t<Bits> ValidBits>
-    class rw_special_function_register : public special_function_register<Address, Base, Bits, ValidBits> {
+    class rw_special_function_register : public special_function_register<Address, Bits, ValidBits> {
     protected:
         template<decltype(ValidBits) BitIndex>
             using bit = rw_bit<rw_special_function_register, BitIndex>;
 
-        using special_function_register<Address, Base, Bits, ValidBits>::reg;
-        using typename special_function_register<Address, Base, Bits, ValidBits>::value_type;
+        using special_function_register<Address, Bits, ValidBits>::reg;
+        using typename special_function_register<Address, Bits, ValidBits>::value_type;
 
     public:
         /**
@@ -172,16 +164,14 @@ namespace registers {
      * * accesses to a register as well as its bits are bound checked, and violations of these bounds will cause compilation to
      * * fail.
      * * @tparam Address The register's address in memory
-     * * @tparam Base The address base of the register
      * * @tparam Bits The register's size in Bits
      * * @tparam ValidBits The available bits in the register
      * * @since 1.0.0
      * */
     template<ptrdiff_t Address, 
-        ptrdiff_t Base, 
         stl::int_types::uint_for_size_t<8> Bits, 
         stl::int_types::uint_for_size_t<Bits> ValidBits>
-    class ro_special_function_register : public special_function_register<Address, Base, Bits, ValidBits> {
+    class ro_special_function_register : public special_function_register<Address, Bits, ValidBits> {
     protected:
         template<decltype(ValidBits) BitIndex>
         using bit = ro_bit<ro_special_function_register, BitIndex>;
@@ -205,7 +195,10 @@ namespace registers {
     template<ptrdiff_t Address, 
         stl::int_types::uint_for_size_t<8> Bits, 
         stl::int_types::uint_for_size_t<Bits> ValidBits>
-    struct rw_io_register : rw_special_function_register<Address, 0x20, Bits, ValidBits> {};
+    struct rw_io_register : rw_special_function_register<Address, Bits, ValidBits> {
+        static_assert(stl::in_range(Address, 0x20, 0xff),
+                "Address is not in Special Function Register range [0x20, 0xff]");
+    };
 
     /**
      * * @brief A safe register wrapper to access the I/O registers of an AVR microcontroller
@@ -219,7 +212,10 @@ namespace registers {
     template<ptrdiff_t Address, 
         stl::int_types::uint_for_size_t<8> Bits, 
         stl::int_types::uint_for_size_t<Bits> ValidBits>
-    struct ro_io_register : ro_special_function_register<Address, 0x20, Bits, ValidBits> {};
+    struct ro_io_register : ro_special_function_register<Address, Bits, ValidBits> {
+        static_assert(stl::in_range(Address, 0x20, 0xff),
+                "Address is not in Special Function Register range [0x20, 0xff]");
+    };
 
 
 
