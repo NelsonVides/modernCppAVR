@@ -59,10 +59,15 @@
  * The ability to include this file (with or without NDEBUG) is a
  * feature.
  */
+#ifndef _ASSERT_H_
+#define _ASSERT_H_
 
 #undef assert
 
 #include <stdlib.h>
+
+
+namespace vAVR {
 
 #if defined(__DOXYGEN__)
 /**
@@ -100,15 +105,15 @@ extern "C" {
 #endif
 
 #if !defined(__DOXYGEN__)
-
-extern void __assert(const char *__func, const char *__file,
-		     int __lineno, const char *__sexp);
-
+extern void __assert(const char *__func, const char *__file, int __lineno, const char *__sexp);
 #endif /* not __DOXYGEN__ */
 
 #ifdef __cplusplus
 }
 #endif
 
+} /* end of namespace vAVR */
+
+#endif /* header guard */
 /*@}*/
 /* EOF */

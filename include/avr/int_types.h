@@ -5,7 +5,7 @@
 #error "Don't add this directly! Only to be used within Internal::Registers"
 #endif
 
-#include "cstdint.h"
+#include "../stl/cstdint.h"
 #include "../stl/type_traits.h"
 
 namespace stl { 

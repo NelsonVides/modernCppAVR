@@ -41,6 +41,8 @@
 #include <avr/io.h>
 #include <stdint.h>
 
+namespace vAVR {
+    using namespace stl;
 /** \file */
 /** \defgroup avr_watchdog <avr/wdt.h>: Watchdog timer handling
     \code #include <avr/wdt.h> \endcode
@@ -505,6 +507,20 @@ void wdt_disable (void)
    wdt_enable(WDTO_500MS);
    \endcode
 */
+
+enum class WDTimes {
+    wdto_15ms,
+    wdto_30ms,
+    wdto_60ms,
+    wdto_120ms,
+    wdto_250ms,
+    wdto_500ms,
+    wdto_1s,
+    wdto_2s,
+    wdto_4s,
+    wdto_8s
+};
+
 #define WDTO_15MS   0
 
 /** \ingroup avr_watchdog
@@ -587,6 +603,7 @@ void wdt_disable (void)
 #define WDTO_8S     9
 
 #endif  /* defined(__DOXYGEN__) || defined(WDP3) */
-   
+
+} /* end of namespace vAVR */
 
 #endif /* _AVR_WDT_H_ */
