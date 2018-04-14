@@ -34,40 +34,41 @@
 #ifndef _UTIL_ATOMIC_H_
 #define _UTIL_ATOMIC_H_ 1
 
+#include <avr/cstdint.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
 #if !defined(__DOXYGEN__)
 /* Internal helper functions. */
-static __inline__ uint8_t __iSeiRetVal(void)
+static __inline__ stl::uint8_t __iSeiRetVal(void)
 {
     sei();
     return 1;
 }
 
-static __inline__ uint8_t __iCliRetVal(void)
+static __inline__ stl::int8_t __iCliRetVal(void)
 {
     cli();
     return 1;
 }
 
-static __inline__ void __iSeiParam(const uint8_t *__s)
+static __inline__ void __iSeiParam(const stl::uint8_t* __s)
 {
     sei();
     __asm__ volatile ("" ::: "memory");
     (void)__s;
 }
 
-static __inline__ void __iCliParam(const uint8_t *__s)
+static __inline__ void __iCliParam(const stl::uint8_t* __s)
 {
     cli();
     __asm__ volatile ("" ::: "memory");
     (void)__s;
 }
 
-static __inline__ void __iRestore(const  uint8_t *__s)
+static __inline__ void __iRestore(const stl::uint8_t* __s)
 {
-    SREG = *__s;
+    vAVR::internal::common::commonChip::SREG::set(*__s);
     __asm__ volatile ("" ::: "memory");
 }
 #endif	/* !__DOXYGEN__ */
@@ -241,7 +242,7 @@ main(void)
 #if defined(__DOXYGEN__)
 #define ATOMIC_RESTORESTATE
 #else
-#define ATOMIC_RESTORESTATE uint8_t sreg_save \
+#define ATOMIC_RESTORESTATE stl::uint8_t sreg_save \
 	__attribute__((__cleanup__(__iRestore))) = SREG
 #endif	/* __DOXYGEN__ */
 
@@ -262,7 +263,7 @@ main(void)
 #if defined(__DOXYGEN__)
 #define ATOMIC_FORCEON
 #else
-#define ATOMIC_FORCEON uint8_t sreg_save \
+#define ATOMIC_FORCEON stl::uint8_t sreg_save \
 	__attribute__((__cleanup__(__iSeiParam))) = 0
 #endif	/* __DOXYGEN__ */
 
@@ -280,7 +281,7 @@ main(void)
 #if defined(__DOXYGEN__)
 #define NONATOMIC_RESTORESTATE
 #else
-#define NONATOMIC_RESTORESTATE uint8_t sreg_save \
+#define NONATOMIC_RESTORESTATE stl::uint8_t sreg_save \
 	__attribute__((__cleanup__(__iRestore))) = SREG
 #endif	/* __DOXYGEN__ */
 
@@ -301,7 +302,7 @@ main(void)
 #if defined(__DOXYGEN__)
 #define NONATOMIC_FORCEOFF
 #else
-#define NONATOMIC_FORCEOFF uint8_t sreg_save \
+#define NONATOMIC_FORCEOFF stl::uint8_t sreg_save \
 	__attribute__((__cleanup__(__iCliParam))) = 0
 #endif	/* __DOXYGEN__ */
 
