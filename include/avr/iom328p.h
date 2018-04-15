@@ -49,6 +49,10 @@
 #ifndef _AVR_IOM328P_H_
 #define _AVR_IOM328P_H_ 1
 
+namespace vAVR {
+    namespace internal {
+        namespace controllers {
+
 /* Registers and associated bit numbers */
 
 #define PINB _SFR_IO8(0x03)
@@ -944,5 +948,9 @@
 #define SLEEP_MODE_PWR_SAVE (0x03<<1)
 #define SLEEP_MODE_STANDBY (0x06<<1)
 #define SLEEP_MODE_EXT_STANDBY (0x07<<1)
+
+}}} /* end of nested namespaces vAVR::internal::controllers */
+
+namespace vAVR { using mcu = vAVR::internal::controllers::mega328p; }
 
 #endif  /* _AVR_IOM328P_H_ */

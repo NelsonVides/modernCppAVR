@@ -34,7 +34,7 @@
 #ifndef _UTIL_ATOMIC_H_
 #define _UTIL_ATOMIC_H_ 1
 
-#include <avr/cstdint.h>
+#include <stl/cstdint.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
 

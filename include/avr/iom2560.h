@@ -111,5 +111,7 @@ namespace vAVR {
 
 }}} /* end of namespace vAVR */
 
+namespace vAVR { using mcu = vAVR::internal::controllers::mega2560; }
+
 #endif /* _AVR_IOM2560_H_ */
 
