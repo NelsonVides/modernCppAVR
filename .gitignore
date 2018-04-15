@@ -1,3 +1,6 @@
 *.o
+*.out
 *.gch
+*.swp
+/readit
 
