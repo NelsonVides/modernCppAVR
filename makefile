@@ -9,7 +9,7 @@
 
 CC = avr-g++
 CPPFLAGS = -Wall -Wextra -Werror -Woverflow -std=c++14 -fno-exceptions -Wno-int-to-pointer-cast
-AVRFLAGS = -mmcu=atmega2560
+AVRFLAGS = -mmcu=atmega2560 -D F_CPU=16000000UL
 INCLUDES = -I ./include
 SOURCES = main.cpp
 OUTDIR = bin
