@@ -135,108 +135,15 @@
 
 
 /* Define an internal sleep control register and an internal sleep enable bit mask. */
-#if defined(SLEEP_CTRL)
-
-    /* XMEGA devices */
-    #define _SLEEP_CONTROL_REG  SLEEP_CTRL
-    #define _SLEEP_ENABLE_MASK  SLEEP_SEN_bm
-
-#elif defined(SMCR)
-
-    #define _SLEEP_CONTROL_REG  SMCR
-    #define _SLEEP_ENABLE_MASK  _BV(SE)
-
-#elif defined(__AVR_AT94K__)
-
-    #define _SLEEP_CONTROL_REG  MCUR
-    #define _SLEEP_ENABLE_MASK  _BV(SE)
-
-#else
-
-    #define _SLEEP_CONTROL_REG  MCUCR
-    #define _SLEEP_ENABLE_MASK  _BV(SE)
-
-#endif
-
-
-/* Special casing these three devices - they are the
-   only ones that need to write to more than one register. */
-#if defined(__AVR_ATmega161__)
-
-    #define set_sleep_mode(mode) \
-    do { \
-        MCUCR = ((MCUCR & ~_BV(SM1)) | ((mode) == SLEEP_MODE_PWR_DOWN || (mode) == SLEEP_MODE_PWR_SAVE ? _BV(SM1) : 0)); \
-        EMCUCR = ((EMCUCR & ~_BV(SM0)) | ((mode) == SLEEP_MODE_PWR_SAVE ? _BV(SM0) : 0)); \
-    } while(0)
-
-
-#elif defined(__AVR_ATmega162__) \
-|| defined(__AVR_ATmega8515__)
-
-    #define set_sleep_mode(mode) \
-    do { \
-        MCUCR = ((MCUCR & ~_BV(SM1)) | ((mode) == SLEEP_MODE_IDLE ? 0 : _BV(SM1))); \
-        MCUCSR = ((MCUCSR & ~_BV(SM2)) | ((mode) == SLEEP_MODE_STANDBY  || (mode) == SLEEP_MODE_EXT_STANDBY ? _BV(SM2) : 0)); \
-        EMCUCR = ((EMCUCR & ~_BV(SM0)) | ((mode) == SLEEP_MODE_PWR_SAVE || (mode) == SLEEP_MODE_EXT_STANDBY ? _BV(SM0) : 0)); \
-    } while(0)
-
-/* For xmegas, check presence of SLEEP_SMODE<n>_bm and define set_sleep_mode accordingly. */
-#elif defined(__AVR_XMEGA__)
-#if defined(SLEEP_SMODE2_bm)
-
-    #define set_sleep_mode(mode) \
-    do { \
-        _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~(SLEEP_SMODE2_bm | SLEEP_SMODE1_bm | SLEEP_SMODE0_bm)) | (mode)); \
-    } while(0)
-
-#elif defined(SLEEP_SMODE1_bm)
-
-    #define set_sleep_mode(mode) \
-    do { \
-        _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~(SLEEP_SMODE1_bm | SLEEP_SMODE0_bm)) | (mode)); \
-    } while(0)
-
-#else
-
-    #define set_sleep_mode(mode) \
-    do { \
-        _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~( SLEEP_SMODE0_bm)) | (mode)); \
-    } while(0)
-
-
-#endif /* #if defined(SLEEP_SMODE2_bm) */
+#define _SLEEP_CONTROL_REG  SMCR
+#define _SLEEP_ENABLE_MASK  _BV(SE)
 
 /* For everything else, check for presence of SM<n> and define set_sleep_mode accordingly. */
-#else
-#if defined(SM2)
 
-    #define set_sleep_mode(mode) \
-    do { \
-        _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~(_BV(SM0) | _BV(SM1) | _BV(SM2))) | (mode)); \
-    } while(0)
-
-#elif defined(SM1)
-
-    #define set_sleep_mode(mode) \
-    do { \
-        _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~(_BV(SM0) | _BV(SM1))) | (mode)); \
-    } while(0)
-
-#elif defined(SM)
-
-    #define set_sleep_mode(mode) \
-    do { \
-        _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~_BV(SM)) | (mode)); \
-    } while(0)
-
-#else
-
-    #error "No SLEEP mode defined for this device."
-
-#endif /* if defined(SM2) */
-#endif /* #if defined(__AVR_ATmega161__) */
-
-
+#define set_sleep_mode(mode) \
+do { \
+    _SLEEP_CONTROL_REG = ((_SLEEP_CONTROL_REG & ~(_BV(SM0) | _BV(SM1) | _BV(SM2))) | (mode)); \
+} while(0)
 
 /** \ingroup avr_sleep
 
@@ -244,11 +151,9 @@
     depends on the specific mode selected with the set_sleep_mode() function.
     See the data sheet for your device for more details. */
 
-
 #if defined(__DOXYGEN__)
 
 /** \ingroup avr_sleep
-
     Set the SE (sleep enable) bit.
 */
 extern void sleep_enable (void);
@@ -266,7 +171,6 @@ do {                               \
 #if defined(__DOXYGEN__)
 
 /** \ingroup avr_sleep
-
     Clear the SE (sleep enable) bit.
 */
 extern void sleep_disable (void);
@@ -282,7 +186,6 @@ do {                               \
 
 
 /** \ingroup avr_sleep
-
     Put the device into sleep mode.  The SE bit must be set
     beforehand, and it is recommended to clear it afterwards.
 */
