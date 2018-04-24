@@ -35,14 +35,8 @@
 
 namespace vAVR {
 
-#ifdef __ASSEMBLER__
-#define _SFR_ASM_COMPAT 1
-#elif !defined(_SFR_ASM_COMPAT)
 #define _SFR_ASM_COMPAT 0
-#endif
 
-#ifndef __ASSEMBLER__
-    /* These only work in C programs.  */
 #include <inttypes.h>
     static inline uint8_t _MMIO_BYTE(uint8_t mem_addr) {
         return (*(volatile uint8_t *)(mem_addr));
@@ -53,50 +47,8 @@ namespace vAVR {
     static inline uint32_t _MMIO_DWORD(uint32_t mem_addr) {
         return (*(volatile uint32_t *)(mem_addr));
     } __attribute__((always_inline))
-#endif
 
-#if _SFR_ASM_COMPAT
-
-#ifndef __SFR_OFFSET
-/* Define as 0 before including this file for compatibility with old asm
-   sources that don't subtract __SFR_OFFSET from symbolic I/O addresses.  */
-#  if __AVR_ARCH__ >= 100
-#    define __SFR_OFFSET 0x00
-#  else
-#    define __SFR_OFFSET 0x20
-#  endif
-#endif
-
-#if (__SFR_OFFSET != 0) && (__SFR_OFFSET != 0x20)
-#error "__SFR_OFFSET must be 0 or 0x20"
-#endif
-
-constexpr auto _SFR_MEM8(auto mem_addr) { return mem_addr;}
-constexpr auto _SFR_MEM16(auto mem_addr) { return mem_addr;}
-constexpr auto _SFR_MEM32(auto mem_addr) { return mem_addr;}
-constexpr auto _SFR_IO8(auto io_addr) { return io_addr + __SFR_OFFSET;}
-constexpr auto _SFR_IO16(auto io_addr) { return io_addr + __SFR_OFFSET;}
-
-constexpr auto _SFR_IO_ADDR(auto sfr) { return sfr - __SFR_OFFSET;}
-constexpr auto _SFR_MEM_ADDR(auto sfr) { return sfr;}
-constexpr auto _SFR_IO_REG_P(auto sfr) { return sfr < 0x40 + __SFR_OFFSET;}
-
-#if (__SFR_OFFSET == 0x20)
-    /* No need to use ?: operator, so works in assembler too.  */
-    constexpr auto _SFR_ADDR(auto sfr) {return _SFR_MEM_ADDR(sfr);}
-#elif !defined(__ASSEMBLER__)
-    constexpr auto _SFR_ADDR(auto sfr) { return (_SFR_IO_REG_P(sfr) ? (_SFR_IO_ADDR(sfr) + 0x20) : _SFR_MEM_ADDR(sfr)); }
-#endif
-
-#else  /* !_SFR_ASM_COMPAT */
-
-#ifndef __SFR_OFFSET
-#  if __AVR_ARCH__ >= 100
-#    define __SFR_OFFSET 0x00
-#  else
-#    define __SFR_OFFSET 0x20
-#  endif
-#endif
+#define __SFR_OFFSET 0x20
 
 constexpr auto _SFR_MEM8(auto mem_addr) { return _MMIO_BYTE(mem_addr);}
 constexpr auto _SFR_MEM16(auto mem_addr) { return _MMIO_WORD(mem_addr);}
@@ -109,8 +61,6 @@ constexpr auto _SFR_IO_ADDR(auto sfr) { return _SFR_MEM_ADDR(sfr) - __SFR_OFFSET
 constexpr auto _SFR_IO_REG_P(auto sfr) { return _SFR_MEM_ADDR(sfr) < 0x40 + __SFR_OFFSET;}
 
 constexpr auto _SFR_ADDR(auto sfr) { return _SFR_MEM_ADDR(sfr);}
-
-#endif /* !_SFR_ASM_COMPAT */
 
 constexpr auto _SFR_BYTE(auto sfr) { return _MMIO_BYTE(_SFR_ADDR(sfr));}
 constexpr auto _SFR_WORD(auto sfr) { return _MMIO_WORD(_SFR_ADDR(sfr));}
@@ -139,8 +89,6 @@ constexpr uint8_t _BV(uint8_t bit) { return 1 << bit; } __attribute__((always_in
 #ifndef _VECTOR
 #define _VECTOR(N) __vector_ ## N
 #endif
-
-#ifndef __ASSEMBLER__
 
 
 /** \name IO register bit manipulation */
@@ -183,7 +131,6 @@ void loop_until_bit_is_clear(auto sfr, auto bit) { do{} while(bit_is_set(sfr,bit
 
 /*@}*/
 
-#endif /* !__ASSEMBLER__ */
 
 } /* namespace Vavr */
 
