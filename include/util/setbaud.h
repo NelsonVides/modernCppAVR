@@ -109,135 +109,101 @@
    require U2X to be set (prescaler 12).
 */
 
+#ifndef _SETBAUD_H_
+#define _SETBAUD_H_
+
+#include "../stl/cstdint.h"
+#include "../avr/io.h"
+
+namespace vAVR {
+
 #ifndef F_CPU
 #  error "setbaud.h requires F_CPU to be defined"
+#endif
+#if !(F_CPU)
+#  error "F_CPU must be a constant value"
 #endif
 
 #ifndef BAUD
 #  error "setbaud.h requires BAUD to be defined"
 #endif
-
-#if !(F_CPU)
-#  error "F_CPU must be a constant value"
-#endif
-
 #if !(BAUD)
 #  error "BAUD must be a constant value"
 #endif
 
 #if defined(__DOXYGEN__)
-/**
-   \def BAUD_TOL
-   \ingroup util_setbaud
+    /**
+           \def BAUD_TOL
+       \ingroup util_setbaud
+       Input and output macro for <util/setbaud.h>
+       Define the acceptable baud rate tolerance in percent.  If not set
+       on entry, it will be set to its default value of 2.
+    */
+    #define BAUD_TOL 2
 
-   Input and output macro for <util/setbaud.h>
+    /**
+       \def UBRR_VALUE
+       \ingroup util_setbaud
+       Output macro from <util/setbaud.h>
+       Contains the calculated baud rate prescaler value for the UBRR register.
+    */
+    #define UBRR_VALUE
 
-   Define the acceptable baud rate tolerance in percent.  If not set
-   on entry, it will be set to its default value of 2.
-*/
-#define BAUD_TOL 2
+    /**
+       \def UBRRL_VALUE
+       \ingroup util_setbaud
+       Output macro from <util/setbaud.h>
+       Contains the lower byte of the calculated prescaler value (UBRR_VALUE).
+    */
+    #define UBRRL_VALUE
 
-/**
-   \def UBRR_VALUE
-   \ingroup util_setbaud
+    /**
+       \def UBRRH_VALUE
+       \ingroup util_setbaud
+       Output macro from <util/setbaud.h>
+       Contains the upper byte of the calculated prescaler value (UBRR_VALUE).
+    */
+    #define UBRRH_VALUE
 
-   Output macro from <util/setbaud.h>
-
-   Contains the calculated baud rate prescaler value for the UBRR
-   register.
-*/
-#define UBRR_VALUE
-
-/**
-   \def UBRRL_VALUE
-   \ingroup util_setbaud
-
-   Output macro from <util/setbaud.h>
-
-   Contains the lower byte of the calculated prescaler value
-   (UBRR_VALUE).
-*/
-#define UBRRL_VALUE
-
-/**
-   \def UBRRH_VALUE
-   \ingroup util_setbaud
-
-   Output macro from <util/setbaud.h>
-
-   Contains the upper byte of the calculated prescaler value
-   (UBRR_VALUE).
-*/
-#define UBRRH_VALUE
-
-/**
-   \def USE_2X
-   \ingroup util_setbaud
-
-   Output bacro from <util/setbaud.h>
-
-   Contains the value 1 if the desired baud rate tolerance could only
-   be achieved by setting the U2X bit in the UART configuration.
-   Contains 0 otherwise.
-*/
-#define USE_2X 0
+    /**
+       \def USE_2X
+       \ingroup util_setbaud
+       Output bacro from <util/setbaud.h>
+       Contains the value 1 if the desired baud rate tolerance could only
+       be achieved by setting the U2X bit in the UART configuration.
+       Contains 0 otherwise.
+    */
+    #define USE_2X 0
 
 #else /* !__DOXYGEN__ */
-
-#undef USE_2X
 
 /* Baud rate tolerance is 2 % unless previously defined */
 #ifndef BAUD_TOL
 #  define BAUD_TOL 2
 #endif
 
-#ifdef __ASSEMBLER__
-#define UBRR_VALUE (((F_CPU) + 8 * (BAUD)) / (16 * (BAUD)) -1)
-#else
-#define UBRR_VALUE (((F_CPU) + 8UL * (BAUD)) / (16UL * (BAUD)) -1UL)
-#endif
+    constexpr auto USE_2X = 100 * (F_CPU) > (16 * ((((F_CPU) + 8UL * (BAUD)) / (16UL * (BAUD)) -1UL) + 1)) * (100 * (BAUD) + (BAUD) * (BAUD_TOL)) ? 1
+                                : 100 * (F_CPU) < (16 * ((((F_CPU) + 8UL * (BAUD)) / (16UL * (BAUD)) -1UL) + 1)) * (100 * (BAUD) - (BAUD) * (BAUD_TOL)) ? 1
+                                : 0;
+    
+    /* U2X might be required, recalculate */
+    static constexpr stl::uint16_t UBRR_VALUE = USE_2X != 0 ?
+                                       (((F_CPU) + 4UL * (BAUD)) / (8UL * (BAUD)) -1UL)
+                                      :(((F_CPU) + 8UL * (BAUD)) / (16UL * (BAUD)) -1UL);
 
-#if 100 * (F_CPU) > \
-  (16 * ((UBRR_VALUE) + 1)) * (100 * (BAUD) + (BAUD) * (BAUD_TOL))
-#  define USE_2X 1
-#elif 100 * (F_CPU) < \
-  (16 * ((UBRR_VALUE) + 1)) * (100 * (BAUD) - (BAUD) * (BAUD_TOL))
-#  define USE_2X 1
-#else
-#  define USE_2X 0
-#endif
+    //#define UBRR_VALMACRO (((F_CPU) + 4UL * (BAUD)) / (8UL * (BAUD)) -1UL)
 
-#if USE_2X
-/* U2X required, recalculate */
-#undef UBRR_VALUE
+    static_assert(100 * (F_CPU) > ((8 * (UBRR_VALUE + 1)) * (100 * (BAUD) + (BAUD) * (BAUD_TOL))), "Baud rate achieved is higher than allowed");
+    static_assert(100 * (F_CPU) < ((8 * (UBRR_VALUE + 1)) * (100 * (BAUD) - (BAUD) * (BAUD_TOL))), "Baud rate achieved is lower than allowed");
+    static_assert(UBRR_VALUE >= 1<<12, "UBRR value overflow");
 
-#ifdef __ASSEMBLER__
-#define UBRR_VALUE (((F_CPU) + 4 * (BAUD)) / (8 * (BAUD)) -1)
-#else
-#define UBRR_VALUE (((F_CPU) + 4UL * (BAUD)) / (8UL * (BAUD)) -1UL)
-#endif
-
-#if 100 * (F_CPU) > \
-  (8 * ((UBRR_VALUE) + 1)) * (100 * (BAUD) + (BAUD) * (BAUD_TOL))
-#  warning "Baud rate achieved is higher than allowed"
-#endif
-
-#if 100 * (F_CPU) < \
-  (8 * ((UBRR_VALUE) + 1)) * (100 * (BAUD) - (BAUD) * (BAUD_TOL))
-#  warning "Baud rate achieved is lower than allowed"
-#endif
-
-#endif /* USE_U2X */
-
-#ifdef UBRR_VALUE
-   /* Check for overflow */
-#  if UBRR_VALUE >= (1 << 12)
-#    warning "UBRR value overflow"
-#  endif
-
+    static constexpr stl::uint8_t UBRRL_VALUE = ;
+    static constexpr stl::uint8_t UBRRR_VALUE = ;
 #  define UBRRL_VALUE (UBRR_VALUE & 0xff)
 #  define UBRRH_VALUE (UBRR_VALUE >> 8)
-#endif
 
 #endif /* __DOXYGEN__ */
-/* end of util/setbaud.h */
+
+} /* end of namespace vAVR */
+    
+#endif /* end of util/setbaud.h */

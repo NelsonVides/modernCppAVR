@@ -5,6 +5,7 @@
 #include <stl/type_traits.h>
 #include <stl/utility.h>
 #include <avr/io.h>
+#include <avr/sfr_defs.h>
 //#include <avr/boot.h>
 //#include <avr/builtins.h>
 //#include <avr/cpufunc.h>
