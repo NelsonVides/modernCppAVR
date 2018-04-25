@@ -27,6 +27,8 @@
 #include <util/atomic.h>
 #include <stl/cstdint.h>
 
+#include <RTOS/queue.h>
+
 namespace vAVR { using mcu = vAVR::internal::controllers::mega2560; }
 
 short factorial(short val) {
