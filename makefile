@@ -15,7 +15,7 @@ SOURCES = main.cpp
 OUTDIR = bin
 OBJ_DIR := $(SOURCES:%.cpp=bin/%)
 
-debug: CPPFLAGS += -g -o debug.out
+debug: CPPFLAGS += -g -o debug.out -D__DEBUG
 standard: CPPFLAGS += -Os -o standard.out
 release: CPPFLAGS += -O2 -o release.out
 sourcecode: CPPFLAGS += -E -o sourcecode.out

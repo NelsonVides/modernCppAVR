@@ -28,13 +28,14 @@ namespace registers {
         static_assert(Index <= Register::bits - 1, "Bit address is outside of register");
         static_assert(Register::validBits & (1 << Index), "Bit is reserved");
 
+#ifndef __DEBUG
         bit() = delete;
         bit(const bit&) = delete;
         bit(bit &&) = delete;
         ~bit() = delete;
         bit& operator=(const bit&) = delete;
         bit& operator=(bit &&) = delete;
-
+#endif
         __attribute__((always_inline)) static inline bool constexpr get() {
             return Register::special_function_register::reg() & (1 << Index);
         }
@@ -94,12 +95,14 @@ namespace registers {
         stl::int_types::uint_for_size_t<Bits> ValidBits>
     class special_function_register {
 
-        special_function_register() = delete;
+#ifndef __DEBUG
+	special_function_register() = delete;
         special_function_register(const special_function_register&) = delete;
         special_function_register(special_function_register&&) = delete;
         ~special_function_register() = delete;
         special_function_register& operator=(const special_function_register&) = delete;
         special_function_register& operator=(special_function_register&&) = delete;
+#endif
 
         template<typename Register, decltype(ValidBits) PinNumber>
             friend struct bit;
