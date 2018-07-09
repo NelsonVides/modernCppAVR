@@ -57,7 +57,6 @@ namespace vAVR {
         namespace controllers {
 
             /* Registers and associated bit numbers */
-
             struct megaxx01 : common::commonChip {
                 ~megaxx01() = delete;
 
@@ -252,50 +251,50 @@ namespace vAVR {
                 using PORTG5 = registers::rw_bit<PORTG, 5>;
 
 
-                using TIFR0     = registers::rw_io_register<0x35, 8, 0b00000111>;
+                using TIFR0 = registers::rw_io_register<0x35, 8, 0b00000111>;
                 using OCF0B = registers::rw_bit<TIFR0, 0x02>;
                 using OCF0A = registers::rw_bit<TIFR0, 0x01>;
                 using TOV0  = registers::rw_bit<TIFR0, 0x00>;
 
-                using TIFR1     = registers::rw_io_register<0x36, 8, 0b00101111>;
+                using TIFR1 = registers::rw_io_register<0x36, 8, 0b00101111>;
                 using ICF1  = registers::rw_bit<TIFR1, 0x05>;
                 using OCF1C = registers::rw_bit<TIFR1, 0x03>;
                 using OCF1B = registers::rw_bit<TIFR1, 0x02>;
                 using OCF1A = registers::rw_bit<TIFR1, 0x01>;
                 using TOV1  = registers::rw_bit<TIFR1, 0x00>;
 
-                using TIFR2     = registers::rw_io_register<0x37, 8, 0b00000111>;
+                using TIFR2 = registers::rw_io_register<0x37, 8, 0b00000111>;
                 using OCF2B = registers::rw_bit<TIFR2, 0x02>;
                 using OCF2A = registers::rw_bit<TIFR2, 0x01>;
                 using TOV2  = registers::rw_bit<TIFR2, 0x00>;
 
-                using TIFR3     = registers::rw_io_register<0x38, 8, 0b00101111>;
+                using TIFR3 = registers::rw_io_register<0x38, 8, 0b00101111>;
                 using ICF3  = registers::rw_bit<TIFR3, 0x05>;
                 using OCF3C = registers::rw_bit<TIFR3, 0x03>;
                 using OCF3B = registers::rw_bit<TIFR3, 0x02>;
                 using OCF3A = registers::rw_bit<TIFR3, 0x01>;
                 using TOV3  = registers::rw_bit<TIFR3, 0x00>;
 
-                using TIFR4     = registers::rw_io_register<0x39, 8, 0b00101111>;
+                using TIFR4 = registers::rw_io_register<0x39, 8, 0b00101111>;
                 using ICF4  = registers::rw_bit<TIFR4, 0x05>;
                 using OCF4C = registers::rw_bit<TIFR4, 0x03>;
                 using OCF4B = registers::rw_bit<TIFR4, 0x02>;
                 using OCF4A = registers::rw_bit<TIFR4, 0x01>;
                 using TOV4  = registers::rw_bit<TIFR4, 0x00>;
 
-                using TIFR5     = registers::rw_io_register<0x3A, 8, 0b00101111>;
+                using TIFR5 = registers::rw_io_register<0x3A, 8, 0b00101111>;
                 using ICF5  = registers::rw_bit<TIFR5, 0x05>;
                 using OCF5C = registers::rw_bit<TIFR5, 0x03>;
                 using OCF5B = registers::rw_bit<TIFR5, 0x02>;
                 using OCF5A = registers::rw_bit<TIFR5, 0x01>;
                 using TOV5  = registers::rw_bit<TIFR5, 0x00>;
 
-                using PCIFR     = registers::rw_io_register<0x3B, 8, 0b00000111>;
+                using PCIFR = registers::rw_io_register<0x3B, 8, 0b00000111>;
                 using PCIF2 = registers::rw_bit<PCIFR, 0x02>;
                 using PCIF1 = registers::rw_bit<PCIFR, 0x01>;
                 using PCIF0 = registers::rw_bit<PCIFR, 0x00>;
 
-                using EIFR      = registers::rw_io_register<0x3C, 8, 0b11111111>;
+                using EIFR  = registers::rw_io_register<0x3C, 8, 0b11111111>;
                 using INTF7 = registers::rw_bit<EIFR, 0x07>;
                 using INTF6 = registers::rw_bit<EIFR, 0x06>;
                 using INTF5 = registers::rw_bit<EIFR, 0x05>;
@@ -305,7 +304,7 @@ namespace vAVR {
                 using INTF1 = registers::rw_bit<EIFR, 0x01>;
                 using INTF0 = registers::rw_bit<EIFR, 0x00>;
 
-                using EIMSK    = registers::rw_io_register<0x3D, 8, 0b11111111>;
+                using EIMSK = registers::rw_io_register<0x3D, 8, 0b11111111>;
                 using INT7 = registers::rw_bit<EIMSK, 0x07>;
                 using INT6 = registers::rw_bit<EIMSK, 0x06>;
                 using INT5 = registers::rw_bit<EIMSK, 0x05>;
@@ -317,7 +316,7 @@ namespace vAVR {
 
                 using GPIOR0  = registers::rw_io_register<0x3E, 8, 0b11111111>;
 
-                using EECR      = registers::rw_io_register<0x3F, 8, 0b00111111>;
+                using EECR  = registers::rw_io_register<0x3F, 8, 0b00111111>;
                 using EEPM1 = registers::rw_bit<EECR, 0x05>;
                 using EEPM0 = registers::rw_bit<EECR, 0x04>;
                 using EERIE = registers::rw_bit<EECR, 0x03>;
@@ -341,12 +340,12 @@ namespace vAVR {
                    Last two letters:   EEAR address.  */
 #define __EEPROM_REG_LOCATIONS__ 1F2021
 
-                using GTCCR       = registers::rw_io_register<0x43, 8, 0b10000011>;
+                using GTCCR   = registers::rw_io_register<0x43, 8, 0b10000011>;
                 using TSM     = registers::rw_bit<GTCCR, 0x07>;
                 using PSRASY  = registers::rw_bit<GTCCR, 0x01>;
                 using PSRSYNC = registers::rw_bit<GTCCR, 0x00>;
 
-                using TCCR0A     = registers::rw_io_register<0x44, 8, 0b11110011>;
+                using TCCR0A = registers::rw_io_register<0x44, 8, 0b11110011>;
                 using COM0A1 = registers::rw_bit<TCCR0A, 0x07>;
                 using COM0A0 = registers::rw_bit<TCCR0A, 0x06>;
                 using COM0B1 = registers::rw_bit<TCCR0A, 0x05>;
@@ -354,7 +353,7 @@ namespace vAVR {
                 using WGM01  = registers::rw_bit<TCCR0A, 0x01>;
                 using WGM00  = registers::rw_bit<TCCR0A, 0x00>;
 
-                using TCCR0B    = registers::rw_io_register<0x45, 8, 0b11001111>;
+                using TCCR0B = registers::rw_io_register<0x45, 8, 0b11001111>;
                 using FOC0A = registers::rw_bit<TCCR0B, 0x07>;
                 using FOC0B = registers::rw_bit<TCCR0B, 0x06>;
                 using WGM02 = registers::rw_bit<TCCR0B, 0x03>;
@@ -371,7 +370,7 @@ namespace vAVR {
                 using GPIOR1  = registers::rw_io_register<0x4A, 8, 0b11111111>;
                 using GPIOR2  = registers::rw_io_register<0x4B, 8, 0b11111111>;
 
-                using SPCR     = registers::rw_io_register<0x4C, 8, 0b11111111>;
+                using SPCR = registers::rw_io_register<0x4C, 8, 0b11111111>;
                 using SPIE = registers::rw_bit<SPCR, 0x07>;
                 using SPE  = registers::rw_bit<SPCR, 0x06>;
                 using DORD = registers::rw_bit<SPCR, 0x05>;
@@ -390,7 +389,7 @@ namespace vAVR {
 
                 /* Reserved [0x4F] */
 
-                using ACSR      = registers::rw_io_register<0x50, 8, 0b11111111>;
+                using ACSR  = registers::rw_io_register<0x50, 8, 0b11111111>;
                 using ACD   = registers::rw_bit<ACSR, 0x07>;
                 using ACBG  = registers::rw_bit<ACSR, 0x06>;
                 using ACO   = registers::ro_bit<ACSR, 0x05>;
@@ -400,8 +399,8 @@ namespace vAVR {
                 using ACIS1 = registers::rw_bit<ACSR, 0x01>;
                 using ACIS0 = registers::rw_bit<ACSR, 0x00>;
 
-                using MONDR   = registers::rw_io_register<0x51, 8, 0b00000000>;
-                using OCDR      = registers::rw_io_register<0x51, 8, 0b11111111>;
+                using MONDR = registers::rw_io_register<0x51, 8, 0b00000000>;
+                using OCDR  = registers::rw_io_register<0x51, 8, 0b11111111>;
                 using IDRD  = registers::rw_bit<OCDR, 0x07>;
                 using OCDR7 = registers::rw_bit<OCDR, 0x07>;
                 using OCDR6 = registers::rw_bit<OCDR, 0x06>;
@@ -414,20 +413,20 @@ namespace vAVR {
 
                 /* Reserved [0x52] */
 
-                using SMCR    = registers::rw_io_register<0x53, 8, 0b00001111>;
+                using SMCR = registers::rw_io_register<0x53, 8, 0b00001111>;
                 using SM2 = registers::rw_bit<SMCR, 0x03>;
                 using SM1 = registers::rw_bit<SMCR, 0x02>;
                 using SM0 = registers::rw_bit<SMCR, 0x01>;
                 using SE  = registers::rw_bit<SMCR, 0x00>;
 
-                using MCUSR     = registers::rw_io_register<0x54, 8, 0b00011111>;
+                using MCUSR = registers::rw_io_register<0x54, 8, 0b00011111>;
                 using JTRF  = registers::rw_bit<MCUSR, 0x04>;
                 using WDRF  = registers::rw_bit<MCUSR, 0x03>;
                 using BORF  = registers::rw_bit<MCUSR, 0x02>;
                 using EXTRF = registers::rw_bit<MCUSR, 0x01>;
                 using PORF  = registers::rw_bit<MCUSR, 0x00>;
 
-                using MCUCR     = registers::rw_io_register<0X55, 8, 0b10010011>;
+                using MCUCR = registers::rw_io_register<0X55, 8, 0b10010011>;
                 using JTD   = registers::rw_bit<MCUCR, 0x07>;
                 using PUD   = registers::rw_bit<MCUCR, 0x04>;
                 using IVSEL = registers::rw_bit<MCUCR, 0x01>;
@@ -435,7 +434,7 @@ namespace vAVR {
 
                 /* Reserved [0x56] */
 
-                using SPMCSR     = registers::rw_io_register<0x57, 8, 0b11111111>;
+                using SPMCSR = registers::rw_io_register<0x57, 8, 0b11111111>;
                 using SPMIE  = registers::rw_bit<SPMCSR, 0x07>;
                 using RWWSB  = registers::rw_bit<SPMCSR, 0x06>;
                 using SIGRD  = registers::rw_bit<SPMCSR, 0x05>;
@@ -447,18 +446,18 @@ namespace vAVR {
 
                 /* Reserved [0x58..0x5A] */
 
-                using RAMPZ      = registers::rw_io_register<0X5B, 8, 0b00000011>;
+                using RAMPZ  = registers::rw_io_register<0X5B, 8, 0b00000011>;
                 using RAMPZ1 = registers::rw_bit<RAMPZ, 0x01>;
                 using RAMPZ0 = registers::rw_bit<RAMPZ, 0x00>;
 
-                using EIND      = registers::rw_io_register<0X5C, 8, 0b00000001>;
+                using EIND  = registers::rw_io_register<0X5C, 8, 0b00000001>;
                 using EIND0 = registers::rw_bit<EIND, 0x00>;
 
                 /* SP [0x5D..0x5E] */
                 /* SREG [0x5F] */
 
 
-                using WDTCSR   = registers::rw_extended_io_register<0x60, 8, 0b11111111>;
+                using WDTCSR = registers::rw_extended_io_register<0x60, 8, 0b11111111>;
                 using WDIF = registers::rw_bit<WDTCSR, 0x07>;
                 using WDIE = registers::rw_bit<WDTCSR, 0x06>;
                 using WDP3 = registers::rw_bit<WDTCSR, 0x05>;
@@ -468,7 +467,7 @@ namespace vAVR {
                 using WDP1 = registers::rw_bit<WDTCSR, 0x01>;
                 using WDP0 = registers::rw_bit<WDTCSR, 0x00>;
 
-                using CLKPR      = registers::rw_extended_io_register<0x61, 8, 0b10001111>;
+                using CLKPR  = registers::rw_extended_io_register<0x61, 8, 0b10001111>;
                 using CLKPCE = registers::rw_bit<CLKPR, 0x07>;
                 using CLKPS3 = registers::rw_bit<CLKPR, 0x03>;
                 using CLKPS2 = registers::rw_bit<CLKPR, 0x02>;
@@ -477,7 +476,7 @@ namespace vAVR {
 
                 /* Reserved [0x62..0x63] */
 
-                using PRR0       = registers::rw_extended_io_register<0x64, 8, 0b11101111>;
+                using PRR0   = registers::rw_extended_io_register<0x64, 8, 0b11101111>;
                 using PRTWI  = registers::rw_bit<PRR0, 0x07>;
                 using PRTIM2 = registers::rw_bit<PRR0, 0x06>;
                 using PRTIM0 = registers::rw_bit<PRR0, 0x05>;
@@ -1230,7 +1229,6 @@ namespace vAVR {
 
                 /* Reserved [0x12E..0x12F] */
 
-
                 using UCSR3A = registers::rw_extended_io_register<0x130, 8, 0b11111111>;
                 using RXC3   = registers::rw_bit<UCSR3A, 0x07>;
                 using TXC3   = registers::rw_bit<UCSR3A, 0x06>;
@@ -1271,10 +1269,7 @@ namespace vAVR {
 
                 using UDR3   = registers::rw_extended_io_register<0X136, 8, 0b11111111>;
 
-
                 /* Reserved [0x137..1FF] */
-
-
 
                 /* Interrupt vectors */
                 /* Vector 0 is the reset vector */

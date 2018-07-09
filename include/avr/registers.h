@@ -1,6 +1,12 @@
 #ifndef AVR_INTERNAL_REGISTERS_HPP
 #define AVR_INTERNAL_REGISTERS_HPP
 
+#ifdef __GNUC__
+#define __COMPILER__INLINE__ __attribute__( ( always_inline ) ) inline
+#else
+#define __COMPILER__INLINE__ inline
+#endif
+
 /*
  * This part of the code was extracted from https://github.com/fmorgner/avrxx. 
  * Merits to fmorger for his templating creativity.
@@ -36,7 +42,8 @@ namespace registers {
         bit& operator=(const bit&) = delete;
         bit& operator=(bit &&) = delete;
 #endif
-        __attribute__((always_inline)) static inline bool constexpr get() {
+
+        __COMPILER__INLINE__ static bool constexpr get() {
             return Register::special_function_register::reg() & (1 << Index);
         }
     };
@@ -52,13 +59,13 @@ namespace registers {
      * */
     template<typename Register, stl::int_types::uint_for_size_t<8> Index>
     struct rw_bit : bit<Register, Index> {
-        __attribute__((always_inline)) static inline void constexpr set() {
+        __COMPILER__INLINE__ static void constexpr set() {
             Register::special_function_register::reg() |= 1 << Index;
         }
-        __attribute__((always_inline)) static inline void constexpr clear() {
+        __COMPILER__INLINE__ static void constexpr clear() {
             Register::special_function_register::reg() &= ~(1 << Index);
         }
-        __attribute__((always_inline)) static inline void constexpr toggle() {
+        __COMPILER__INLINE__ static void constexpr toggle() {
             Register::special_function_register::reg() ^= 1 << Index;
         }
     };
@@ -117,13 +124,13 @@ namespace registers {
         static auto constexpr address = Address;
         static auto constexpr bits = Bits;
         static auto constexpr validBits = ValidBits;
-        __attribute__((always_inline)) static inline decltype(auto) constexpr reg() {
+        __COMPILER__INLINE__ static decltype(auto) constexpr reg() {
             return (*reinterpret_cast<value_type volatile *>(Address));
         }
 
     public:
         using value_type = stl::int_types::uint_for_size_t<Bits>;
-        __attribute__((always_inline)) static inline auto constexpr get() {
+        __COMPILER__INLINE__ static auto constexpr get() {
             return reg();
         }
     };
@@ -156,7 +163,7 @@ namespace registers {
          * this functions can be used to set the value of the whole register by writing the register's full content.
          * * @see stl::internal::registers::special_function_register::get
          * */
-        __attribute__((always_inline)) static inline auto constexpr set(value_type const value) {
+        __COMPILER__INLINE__ static auto constexpr set(value_type const value) {
             reg() = value;
         }
     };

@@ -52,7 +52,7 @@ ISR(TIMER1_OVF_vect)
     ctr--;
 }
 
-int main(void)
+int mainthree(void)
 {
     ctr = 0x200;
     sei();
@@ -68,8 +68,6 @@ int main(void)
 }
 
 
-
-/*
 int main()
 {
     long a = 2;
@@ -88,4 +86,3 @@ int main()
         mainLoop(a);
     }
 }
-*/
