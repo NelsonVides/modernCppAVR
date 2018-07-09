@@ -96,6 +96,10 @@
 #ifndef _AVR_IO_H_
 #define _AVR_IO_H_
 
+#ifndef __cplusplus
+    #error A C++ compiler is required for the AtomicBlock Library.
+#endif
+
 #include "sfr_defs.h"
 #include "common.h"
 
