@@ -301,7 +301,7 @@ namespace vAVR {
             public:
                 template<typename _Type>                                      // template parameter
                 __COMPILER__INLINE__ static                                   // function attributes
-                    typename _TypeSeparator<_BlockType, _Type>::TemporaryType //return type
+                    typename _TypeSeparator<_BlockType, _Type>::TemporaryType // return type
                     Protect(_Type& t_Var)                                     // name binding and parameter type
                 {
                     return typename _TypeSeparator<_BlockType, _Type>::TemporaryType(t_Var);
@@ -349,7 +349,7 @@ namespace vAVR {
             __COMPILER__INLINE__ ~Atomic_RestoreState()
             {
                 if (_SafeRestore)
-                {   // in "(this->u_SREG & _BV(SREG_I))" I'm just trying to check SREG_I status
+                {
                     if (_Atomic && mcu::SREG_I::get() ) internal::GlobalInterruptsOn();
                     if (!_Atomic && !mcu::SREG_I::get()) internal::GlobalInterruptsOff();
                 }
@@ -358,24 +358,27 @@ namespace vAVR {
                     mcu::SREG::set(this->u_SREG);
                 }
             }
+
             const stl::uint8_t u_SREG;
         };
 
         /*********************************************************************
             Atomic_Force interface.
                 This will force the current state of interrupts to be a
-                state depending on'_Atomic'. If true, the operation is
+                state depending on '_Atomic'. If true, the operation is
                 atomic. If false the operation is non-atomic.
         *********************************************************************/
 
         template<bool _Atomic, bool _Unused = true>
-        struct Atomic_Force {
+        struct Atomic_Force
+        {
             __COMPILER__INLINE__ Atomic_Force()
             {
                 (_Atomic ?
                     internal::GlobalInterruptsOff :
                     internal::GlobalInterruptsOn)();
             }
+
             __COMPILER__INLINE__ ~Atomic_Force()
             {
                 (_Atomic ?
@@ -383,18 +386,6 @@ namespace vAVR {
                     internal::GlobalInterruptsOff)();
             }
         };
-
-
-        /*********************************************************************
-            Atomic_None interface.
-                This addition allows objects to implement conditional
-                atomic blocking, allowing support for thread/ISR safe code.
-                If a user of the object has no need for synchronisation or
-                thread safety, passing Atomic_None stops the interrupt
-                handling instructions from being generated.
-        *********************************************************************/
-        template<bool _Unused_A = true, bool _Unused_B = true> struct Atomic_None {};
-
 
         /*********************************************************************
             Main high-level interfaces.
@@ -458,6 +449,17 @@ namespace vAVR {
 
             __COMPILER__INLINE__ ~NonAtomicBlockSafe() {}
         };
+
+        /*********************************************************************
+            Atomic_None interface.
+                This addition allows objects to implement conditional
+                atomic blocking, allowing support for thread/ISR safe code.
+                If a user of the object has no need for synchronisation or
+                thread safety, passing Atomic_None stops the interrupt
+                handling instructions from being generated.
+        *********************************************************************/
+        template<bool _Unused_A = true, bool _Unused_B = true>
+        struct Atomic_None {};
 
         /*********************************************************************
             AtomicIf helper.
