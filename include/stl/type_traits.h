@@ -210,7 +210,11 @@ namespace stl {
     template<> struct make_unsigned<signed long>       { using type = unsigned long; };
     template<> struct make_unsigned<signed long long>  { using type = unsigned long long; };
 
-
+    // Selects a type based on 'Condition'.
+    template<bool Condition, typename True, typename False>
+    struct Select { using Result = True; };
+    template<typename True, typename False>
+    struct Select<false, True, False> { using Result = False; };
 } //end of namespace atl
 
 #endif

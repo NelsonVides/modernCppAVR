@@ -202,7 +202,7 @@
 #include "../avr/io.h"
 
 namespace vAVR {
-    namespace atomic {
+    namespace Atomic {
         namespace internal {
 
             static constexpr bool _Safe = true;
