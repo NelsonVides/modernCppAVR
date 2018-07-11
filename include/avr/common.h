@@ -34,8 +34,8 @@
 #ifndef _AVR_COMMON_H
 #define _AVR_COMMON_H
 
-#include <avr/sfr_defs.h>
-#include <avr/registers.h>
+#include "../avr/sfr_defs.h"
+#include "../avr/registers.h"
 
 namespace vAVR {
     namespace internal {

@@ -35,7 +35,7 @@
 #ifndef _AVR_IOM2560_H_
 #define _AVR_IOM2560_H_ 1
 
-#include <avr/iomxx0_1.h>
+#include "avr/iomxx0_1.h"
 
 #define __HAS_EEPROM_MEMORY__
 #define __HAS_BOOTLOADER_SUPPORT__

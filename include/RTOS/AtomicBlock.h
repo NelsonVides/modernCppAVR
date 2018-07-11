@@ -198,8 +198,8 @@
     #define __COMPILER__INLINE__ inline
 #endif
 
-#include <stl/cstdint.h>
-#include <avr/io.h>
+#include "../stl/cstdint.h"
+#include "../avr/io.h"
 
 namespace vAVR {
     namespace atomic {

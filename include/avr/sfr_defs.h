@@ -43,7 +43,7 @@ namespace vAVR {
 
 #define _SFR_ASM_COMPAT 0
 
-#include <inttypes.h>
+#include "../inttypes.h"
     __COMPILER__INLINE__ static uint8_t _MMIO_BYTE(uint8_t mem_addr) {
         return (*(volatile uint8_t *)(mem_addr));
     }

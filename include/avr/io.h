@@ -104,11 +104,11 @@
 #include "common.h"
 
 #if defined (__AVR_ATmega2560__)
-#  include <avr/iom2560.h>
+#  include "iom2560.h"
 #elif defined (__AVR_ATmega328P__)
-#  include <avr/iom328p.h>
+#  include "iom328p.h"
 #elif (defined __AVR_ATmega328__)
-#  include <avr/iom328p.h>
+#  include "iom328p.h"
 #else
 #  if !defined(__COMPILING_AVR_LIBC__)
 #    error "device type not defined"
