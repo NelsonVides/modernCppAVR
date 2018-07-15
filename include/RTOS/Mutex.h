@@ -9,6 +9,8 @@ namespace vAVR {
     namespace Sync {
 
         using TaskID = stl::uint8_t;
+        constexpr stl::uint8_t LOCK_FREE = 0xFF;
+        class vTask; //forward declaration to tasks
 
         enum class MUTEX_BLOCK {
             m_Restore,
@@ -23,68 +25,69 @@ namespace vAVR {
 
         namespace internal {
 
-            constexpr stl::uint8_t LOCK_FREE = 0xFF;
-
-            template<typename LockChild>
+            template<typename LockType>
             struct LockBase
             {
-                bool ReferenceStart(const TaskID t_TaskID)
+            protected:
+                template<MUTEX_BLOCK,LOCK_MODE> friend class Mutex;
+                vTask* t_Task;
+                volatile unsigned char c_Counter;
+                LockBase(vTask* owner) : t_Task(owner) {}
+
+            public:
+                bool ReferenceStart(vTask *const p_Task)
                 {
-                    return static_cast<LockChild*>(this)->ReferenceStartImpl(t_TaskID);
+                    return static_cast<LockType*>(this)->ReferenceStartImpl(p_Task);
                 }
-                bool ReferenceDecrease(const TaskID t_TaskID)
+                bool ReferenceDecrease(vTask *const p_Task)
                 {
-                    return static_cast<LockChild*>(this)->ReferenceDecreaseImpl(t_TaskID);
+                    return static_cast<LockType*>(this)->ReferenceDecreaseImpl(p_Task);
                 }
-                bool ReferenceIncrease(const TaskID t_TaskID)
+                bool ReferenceIncrease(vTask *const p_Task)
                 {
-                    return static_cast<LockChild*>(this)->ReferenceIncreaseImpl(t_TaskID);
+                    return static_cast<LockType*>(this)->ReferenceIncreaseImpl(p_Task);
                 }
             };
 
             class SimpleLock : LockBase<SimpleLock>
             {
-                bool ReferenceStartImpl(const TaskID t_TaskID)
+                __COMPILER__INLINE__ bool ReferenceStartImpl(vTask*const p_Task)
                 {
-                    t_Task = t_TaskID;
-                    return true;
+                    t_Task = p_Task;
+                    return (c_Counter = true);
                 }
 
-                bool ReferenceDecreaseImpl(const TaskID t_TaskID)
+                __COMPILER__INLINE__ bool ReferenceDecreaseImpl(vTask*const p_Task)
                 {
-                    if (t_Task == t_TaskID) return (t_Task = LOCK_FREE);
+                    if (t_Task == p_Task) return (c_Counter = true);
                     return false;
                 }
 
-                bool ReferenceIncreaseImpl(const TaskID t_TaskID)
+                __COMPILER__INLINE__ bool ReferenceIncreaseImpl(vTask*const p_Task)
                 {
-                    (void)t_TaskID;
+                    if (t_Task == p_Task) return (c_Counter = false);
                     return false;
                 }
-
-                volatile TaskID t_Task;
             };
 
-            class RecursiveLock : LockBase<SimpleLock>
+            class RecursiveLock : LockBase<RecursiveLock>
             {
-                bool ReferenceStartImpl(const TaskID t_TaskID)
+                __COMPILER__INLINE__ bool ReferenceStartImpl(vTask*const p_Task)
                 {
-                    t_Task = t_TaskID;
+                    t_Task = p_Task;
                     return (c_Counter = 0x1);
                 }
-                bool ReferenceDecreaseImpl(const TaskID t_TaskID)
+                __COMPILER__INLINE__ bool ReferenceDecreaseImpl(vTask*const p_Task)
                 {
-                    if (t_Task != t_TaskID) return false;
-                    if (--c_Counter == 0x0) t_Task = LOCK_FREE;
-                    return true;
+                    if (t_Task != p_Task) return false;
+                    if (--c_Counter == 0x0) return true;
+                    return false;
                 }
-                bool ReferenceIncreaseImpl(const TaskID t_TaskID)
+                __COMPILER__INLINE__ bool ReferenceIncreaseImpl(vTask*const p_Task)
                 {
-                    if ((t_Task != t_TaskID)) return false;
+                    if ((t_Task != p_Task)) return false;
                     return ++c_Counter;
                 }
-                volatile unsigned char c_Counter;
-                volatile TaskID        t_Task;
             };
 
             /*********************************************************************
@@ -116,61 +119,47 @@ namespace vAVR {
         /*********************************************************************
             Mutex class.
         *********************************************************************/
-        // TODO: make some enum for classes.
-        template<HMUTEX _MUTEX_ID,
-            MUTEX_BLOCK _BlockMode = MUTEX_BLOCK::m_Force,
-            LOCK_MODE   _LockMode = LOCK_MODE::l_Recursive>
+        template<MUTEX_BLOCK _BlockMode = MUTEX_BLOCK::m_Force,
+            LOCK_MODE _LockMode = LOCK_MODE::l_Recursive>
         class Mutex
         {
             using Atomicity = typename internal::AtomicPolicy<_BlockMode>::Result;
             using LockingKind = typename internal::LockPolicy<_LockMode>::Result;
+            LockingKind m_Lock;
         
         public:
-            __COMPILER__INLINE__ bool InUse()
+            explicit Mutex(vTask* p_Task) : m_Lock(p_Task) {}
+
+            inline bool InUse() const
             {
                 Atomicity temporaryAtom;
-                return (LockingKind::t_Task != internal::LOCK_FREE)();
+                return m_Lock.c_Counter != 0x00;
             }
 
-            __COMPILER__INLINE__ bool IsOwner(const TaskID _TASK_ID)
+            inline bool IsOwner(const vTask * const p_Task) const
             {
                 Atomicity temporaryAtom;
-                return LockingKind::t_Task == _TASK_ID;
+                return m_Lock.t_Task == p_Task;
             }
 
-            __COMPILER__INLINE__ bool Lock(const TaskID _TASK_ID)
+            inline const vTask * Owner() const
             {
                 Atomicity temporaryAtom;
-                return (InUse() ? LockingKind::ReferenceIncrease : LockingKind::ReferenceStart)(_TASK_ID);
+                return m_Lock.t_Task;
             }
 
-            __COMPILER__INLINE__ TaskID Owner()
+            inline bool Lock(const vTask * const p_Task)
             {
                 Atomicity temporaryAtom;
-                return LockingKind::t_Task;
+                return (InUse() ? m_Lock.ReferenceIncrease : m_Lock.ReferenceStart)(p_Task);
             }
 
-            __COMPILER__INLINE__ bool Unlock(const TaskID _TASK_ID)
+            __COMPILER__INLINE__ bool Unlock(const vTask * const p_Task)
             {
                 Atomicity temporaryAtom;
-                return LockingKind::ReferenceDecrease(_TASK_ID);
+                return m_Lock.ReferenceDecrease(p_Task);
             }
         };
-
-
-        /*********************************************************************
-            MutexData structure.
-                This interface deconstructs a mutex handle to its definition.
-        *********************************************************************/
-        template<HMUTEX _Val>
-        struct MutexData
-        {
-            enum {
-                BlockTypeID = stl::uint8_t(_Val >> 0x8),     // What sort of blocking the mutex uses.
-                MutexID = stl::uint8_t(_Val),                // The ID of the mutex.
-            };
-        };
-
     } /* end of namespace Sync */
 } /* end of namespace vAVR */
 

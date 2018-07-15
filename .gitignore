@@ -2,5 +2,6 @@
 *.out
 *.gch
 *.swp
+.vs/
 /readit
 
